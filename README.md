@@ -59,12 +59,13 @@ python main.py --topic bitcoin
 
 ```cron
 0 7 * * *   cd /path/to/overwatch && .venv/bin/python main.py --topic ai
-0 8 * * 1   cd /path/to/overwatch && .venv/bin/python main.py --topic bitcoin
 ```
 
 ## Output
 
-Briefs are rendered to `output/<topic>/<date>.md` and `output/<topic>/<date>.html`.
+Briefs are rendered to `output/<topic>/<date>_<slug>.md` and `.html`.
+
+HTML copies are also published to the repo root for GitHub Pages, with an `index.html` listing all briefs.
 
 ## YouTube transcripts
 
