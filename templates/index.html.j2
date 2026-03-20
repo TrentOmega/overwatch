@@ -56,6 +56,10 @@
         .brief-list a:hover {
             color: #7ecde8;
         }
+        .byline {
+            color: #999;
+            font-size: 0.85rem;
+        }
         footer {
             border-top: 1px solid #333;
             margin-top: 2rem;
@@ -75,7 +79,7 @@
         <h2>{{ topic.name }}</h2>
         <ul class="brief-list">
             {% for brief in topic.briefs %}
-            <li><a href="{{ brief.path }}">{{ brief.date }}</a></li>
+            <li><a href="{{ brief.path }}">{{ brief.date }}</a>{% if brief.byline %} <span class="byline">— {{ brief.byline }}</span>{% endif %}</li>
             {% endfor %}
         </ul>
     </div>

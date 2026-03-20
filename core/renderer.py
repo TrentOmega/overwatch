@@ -5,6 +5,27 @@ import markdown
 from jinja2 import Environment, FileSystemLoader
 
 
+def _generate_byline(content, max_items=3, max_len=60):
+    """Extract a short slug-friendly byline from the first bold headlines in the content."""
+    headlines = re.findall(r'\*\*(.+?)\*\*', content)
+    # Skip very short or generic matches
+    headlines = [h for h in headlines if len(h) > 5 and not h.startswith("Why")]
+    slugs = []
+    seen = set()
+    for h in headlines:
+        if len(slugs) >= max_items:
+            break
+        # Slugify: lowercase, keep alphanum and hyphens, collapse whitespace
+        s = re.sub(r'[^a-z0-9]+', '-', h.lower()).strip('-')
+        # Truncate individual slugs
+        s = s[:25].rstrip('-')
+        if s and s not in seen:
+            seen.add(s)
+            slugs.append(s)
+    byline = '_'.join(slugs)
+    return byline[:max_len].rstrip('-_') if byline else ""
+
+
 def render(content, topic_config, items, date_str, output_dir="output", templates_dir="templates"):
     """Render synthesized content to markdown and HTML files."""
     slug = topic_config["slug"]
@@ -15,6 +36,8 @@ def render(content, topic_config, items, date_str, output_dir="output", template
     source_names = sorted(set(item["source_name"] for item in items if item.get("source_name")))
 
     content_html = _md_to_html(content)
+    byline = _generate_byline(content)
+    basename = f"{date_str}_{byline}" if byline else date_str
 
     context = {
         "topic_name": topic_config["name"],
@@ -25,12 +48,12 @@ def render(content, topic_config, items, date_str, output_dir="output", template
         "sources": source_names,
     }
 
-    md_path = os.path.join(topic_dir, f"{date_str}.md")
+    md_path = os.path.join(topic_dir, f"{basename}.md")
     md_template = env.get_template("brief.md.j2")
     with open(md_path, "w") as f:
         f.write(md_template.render(context))
 
-    html_path = os.path.join(topic_dir, f"{date_str}.html")
+    html_path = os.path.join(topic_dir, f"{basename}.html")
     html_template = env.get_template("brief.html.j2")
     with open(html_path, "w") as f:
         f.write(html_template.render(context))
