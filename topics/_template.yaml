@@ -1,0 +1,27 @@
+name: Topic Name
+slug: topic-slug
+schedule: daily  # daily, weekly, monthly
+
+sources:
+  - type: rss
+    name: Source Name
+    url: https://example.com/feed.xml
+
+  # - type: api
+  #   adapter: arxiv
+  #   query: "search query"
+
+  # - type: scraper
+  #   name: Source Name
+  #   url: https://example.com/page
+  #   selector: ".article"
+
+synthesis:
+  system_prompt: |
+    You are an intelligence analyst producing a {schedule} brief on {name}.
+    Analyze the collected items and produce a structured briefing that highlights
+    the most significant developments, emerging trends, and key takeaways.
+  focus_areas:
+    - Area 1
+    - Area 2
+    - Area 3

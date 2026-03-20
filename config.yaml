@@ -1,0 +1,5 @@
+output_dir: output
+state_dir: state
+publisher:
+  type: git
+  auto_push: false

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ topic_name }} Brief — {{ date }}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', serif;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            color: #1a1a1a;
+            background: #fafaf8;
+            line-height: 1.7;
+        }
+        header {
+            border-bottom: 2px solid #1a1a1a;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        header .meta {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+        .content {
+            font-size: 1rem;
+        }
+        .content h1, .content h2, .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.6rem;
+        }
+        .content h1 { font-size: 1.4rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+        .content p { margin-bottom: 1rem; }
+        .content ul, .content ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+        .content li { margin-bottom: 0.4rem; }
+        .content a { color: #1a5f7a; }
+        .content blockquote {
+            border-left: 3px solid #ccc;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: #555;
+        }
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .content th, .content td {
+            border: 1px solid #ddd;
+            padding: 0.5rem 0.75rem;
+            text-align: left;
+        }
+        .content th {
+            background: #f0f0ee;
+            font-weight: 700;
+        }
+        .content tr:nth-child(even) {
+            background: #f8f8f6;
+        }
+        .content hr {
+            border: none;
+            border-top: 1px solid #ddd;
+            margin: 2rem 0;
+        }
+        footer {
+            border-top: 1px solid #ddd;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            font-size: 0.8rem;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ topic_name }} Brief</h1>
+        <div class="meta">{{ date }} · {{ item_count }} items collected · Overwatch</div>
+    </header>
+    <div class="content">
+        {{ content_html }}
+    </div>
+    <footer>
+        Sources: {{ sources | join(", ") }}
+    </footer>
+</body>
+</html>

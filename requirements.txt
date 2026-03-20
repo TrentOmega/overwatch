@@ -1,0 +1,8 @@
+feedparser
+jinja2
+markdown
+pyyaml
+requests
+websocket-client
+youtube-transcript-api
+yt-dlp

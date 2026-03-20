@@ -1,0 +1,126 @@
+name: Artificial Intelligence
+slug: ai
+schedule: daily
+
+sources:
+  # --- RSS feeds for general AI news ---
+  - type: rss
+    name: OpenAI Blog
+    url: https://openai.com/blog/rss.xml
+
+  - type: rss
+    name: Google AI Blog
+    url: https://blog.google/technology/ai/rss/
+
+  - type: rss
+    name: AI News (MIT Tech Review)
+    url: https://www.technologyreview.com/topic/artificial-intelligence/feed
+
+  # --- AI Daily Brief podcast ---
+  - type: youtube_channel
+    name: AI Daily Brief
+    channel_url: https://www.youtube.com/@AIDailyBrief
+    max_videos: 1
+    extract: transcript
+    purpose: podcast_summary
+
+  - type: rss
+    name: AI Daily Brief (RSS)
+    url: https://aidailybrief.ai/episodes  # fallback if YouTube fails
+
+  # --- YouTube workflow/tactic extraction ---
+  - type: youtube_search
+    name: AI Workflows (YouTube)
+    query: "AI Claude workflow automation"
+    period_hours: 24
+    min_views: 10000
+    max_results: 10
+    extract: transcript
+    purpose: workflow_extraction
+
+  # --- Social media monitoring ---
+  - type: social
+    name: Andrej Karpathy
+    platform: x
+    handle: karpathy
+    urls:
+      - https://x.com/karpathy
+      - https://www.youtube.com/c/AndrejKarpathy
+      - https://karpathy.ai
+
+  - type: social
+    name: Peter Steinberg
+    platform: x
+    handle: steipete
+    urls:
+      - https://x.com/steipete
+
+  - type: social
+    name: Pablo (pablof7z)
+    platform: nostr
+    handle: pablof7z
+    pubkey: fa984bd7dbb282f07e16e7ae87b26a2a7b9b90b7246a44771f0cf5ae58018f52
+    urls:
+      - https://primal.net/pablof7z
+
+synthesis:
+  system_prompt: |
+    You are an intelligence analyst producing a daily AI brief.
+    Search for and summarize AI developments from the last ~24 hours only.
+    Produce a high-signal daily intel brief.
+
+    This should read like an intel brief, not a press roundup.
+    No fluff, no hype, no speculation.
+    Silence is a feature: if nothing significant happened, say NSTR.
+    Keep the brief tight and readable.
+
+  categories:
+    - name: "New LLM versions / major AI lab tools"
+      scope: "New LLM version releases or new tools from Google, Anthropic, xAI, Meta, OpenAI, and other major competitors"
+
+    - name: "FOSS / open-weight LMs & tools"
+      scope: "Major FOSS/open-weight LM updates (e.g. OpenClaw, DeepSeek, Llama)"
+
+    - name: "Major financial AI company news"
+      scope: "Significant financial moves, funding, acquisitions, IPOs in AI"
+
+    - name: "Major AI data center news"
+      scope: "AI data center / infrastructure news"
+
+    - name: "Regulation & policy"
+      scope: "Proposed or enacted laws, executive actions, regulator guidance/enforcement, major court decisions, and significant government policy positions related to AI"
+
+    - name: "Australia — AI news"
+      scope: "Noteworthy AI news from Australia across government, regulators, industry, academia, and infrastructure"
+
+    - name: "AI Workflows & Tactics"
+      scope: "Top tactical and actionable AI workflows extracted from YouTube videos with high view counts. For each workflow: what it does, what tools/models it uses, step-by-step how to set it up, and whether it's available now. Focus on practical, reproducible techniques the reader can implement today."
+
+    - name: "Notable Voices"
+      scope: "Noteworthy posts and insights from Andrej Karpathy, Peter Steinberg (steipete), and Pablo (pablof7z)"
+
+    - name: "Podcast Highlights"
+      scope: "Key topics and summaries from the AI Daily Brief podcast. For each topic covered: what is it, is it available now, how do you use it (specific steps/links if possible), and why it matters. Go beyond headlines — give the reader enough to act on."
+
+  format_rules: |
+    For each category:
+    - If no meaningful updates, write only: "NSTR"
+    - Do NOT add filler explanations when a category is NSTR
+    - For items with updates include:
+      - Date
+      - Working primary-source link (prefer official source or Reuters)
+      - Short plain-English summary
+      - Short "Why it matters"
+    - Keep each item concise
+
+    After all categories, include a compact summary table.
+    Use categories as rows and a short status/signal as the value.
+
+  focus_areas:
+    - Foundation model releases and capabilities
+    - AI policy, regulation, and safety
+    - Research breakthroughs and notable papers
+    - Industry moves and product launches
+    - Open source developments
+    - Practical AI workflows and automation
+    - Australian AI ecosystem
