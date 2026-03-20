@@ -63,6 +63,33 @@ sources:
     urls:
       - https://primal.net/pablof7z
 
+  - type: social
+    name: Dylan Patel (SemiAnalysis)
+    platform: x
+    handle: dylan522p
+    urls:
+      - https://x.com/dylan522p
+      - https://newsletter.semianalysis.com/
+      - https://semianalysis.com
+
+  - type: social
+    name: Nathan Lambert (Ai2)
+    platform: x
+    handle: natolambert
+    urls:
+      - https://x.com/natolambert
+      - https://www.interconnects.ai/
+      - https://natolambert.com
+
+  - type: social
+    name: Sebastian Raschka (Ai2)
+    platform: x
+    handle: rasbt
+    urls:
+      - https://x.com/rasbt
+      - https://magazine.sebastianraschka.com/
+      - https://sebastianraschka.com
+
 synthesis:
   system_prompt: |
     You are an intelligence analyst producing a daily AI brief.
@@ -97,7 +124,7 @@ synthesis:
       scope: "Top tactical and actionable AI workflows extracted from YouTube videos with high view counts. For each workflow: what it does, what tools/models it uses, step-by-step how to set it up, and whether it's available now. Focus on practical, reproducible techniques the reader can implement today."
 
     - name: "Notable Voices"
-      scope: "Noteworthy posts and insights from Andrej Karpathy, Peter Steinberg (steipete), and Pablo (pablof7z)"
+      scope: "Noteworthy posts and insights from Andrej Karpathy, Peter Steinberg (steipete), Pablo (pablof7z), Dylan Patel (SemiAnalysis), Nathan Lambert (Ai2/Interconnects), and Sebastian Raschka (Ai2/Ahead of AI)"
 
     - name: "Podcast Highlights"
       scope: "Key topics and summaries from the AI Daily Brief podcast. For each topic covered: what is it, is it available now, how do you use it (specific steps/links if possible), and why it matters. Go beyond headlines — give the reader enough to act on. For each topic, include direct links to the references, papers, tools, or announcements discussed. If the podcast does not cite specific references, search the web for the most reliable primary sources (official blogs, papers, docs) and include those links."
