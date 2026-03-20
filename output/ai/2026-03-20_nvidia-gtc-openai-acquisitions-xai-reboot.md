@@ -6,6 +6,20 @@
 
 # AI Daily Brief — 2026-03-20
 
+## Summary Table
+
+| # | Category | Signal |
+|---|---|---|
+| [1](#1-new-llm-versions-major-ai-lab-tools) | **New LLMs / Lab Tools** | Anthropic ships Claude Code Channels; OpenAI acquires Astral; xAI leadership purge; Meta model struggles |
+| [2](#2-foss-open-weight-lms-tools) | **FOSS / Open-Weight** | NVIDIA NemoClaw wraps OpenClaw with security + open Nemotron models |
+| [3](#3-major-financial-ai-company-news) | **Financial Moves** | Anthropic closes to 24.4% market share; Cursor at $50B; OpenAI double acquisition (Astral + Promptfoo) |
+| [4](#4-major-ai-data-center-news) | **Data Centers** | NVIDIA Vera Rubin (10x perf/watt); $1T pipeline; Nebius $150B facility faces legal block; labor shortage binding |
+| [5](#5-regulation-policy) | **Regulation & Policy** | DOJ vs Anthropic First Amendment case; Pentagon users resist Claude ban; classified training planned; EU softening AI Act |
+| [6](#6-australia-ai-news) | **Australia** | Anthropic exec visit late March; no AI-specific legislation expected |
+| [7](#7-ai-workflows-tactics) | **Workflows & Tactics** | NSTR |
+| [8](#8-notable-voices) | **Notable Voices** | Karpathy's autoresearch: 700 autonomous experiments, 20 real optimizations found |
+| [9](#9-podcast-highlights) | **Podcast Highlights** | Meta may license Gemini; Cursor $50B; 81% doctors using AI |
+
 ---
 
 ## 1. New LLM Versions / Major AI Lab Tools
@@ -176,35 +190,12 @@ Karpathy's open-source "autoresearch" framework lets AI agents autonomously run 
 **AI Daily Brief — Key topics covered** — 2026-03-19
 [aidailybrief.ai](https://aidailybrief.ai/)
 
-- **Meta delays next AI model ("Avocado")** — underperformed Gemini 3.0; Meta reportedly exploring licensing Google's Gemini. Significant if confirmed — would mark first time a big-tech lab outsources its frontier model.
-- **Cursor seeking $50B valuation** — AI code editor raising at a valuation that would place it among the most valuable private software companies globally.
+- **Meta delays next AI model ("Avocado")** — underperformed Gemini 3.0; Meta reportedly exploring licensing Google's Gemini. Significant if confirmed — would mark first time a big-tech lab outsources its frontier model. *(See [§1 — xAI/Meta struggles](#1-new-llm-versions-major-ai-lab-tools))*
+- **Cursor seeking $50B valuation** — AI code editor raising at a valuation that would place it among the most valuable private software companies globally. *(See [§3 — Cursor $50B](#3-major-financial-ai-company-news))*
 - **Anthropic exploring enterprise consulting** — moving beyond API sales into hands-on implementation services.
-- **NVIDIA NemoClaw** — open-source security stack wrapping OpenClaw for enterprise use on NVIDIA hardware.
+- **NVIDIA NemoClaw** — open-source security stack wrapping OpenClaw for enterprise use on NVIDIA hardware. *(See [§2 — NemoClaw](#2-foss-open-weight-lms-tools))*
 - **Manus and Adaptive launch desktop agents** — new entrants in the desktop automation space competing with OpenClaw.
 - **81% of doctors already use AI** — adoption data suggesting healthcare AI has crossed from early-adopter to mainstream.
 
----
-
-## Summary Table
-
-| Category | Signal |
-|---|---|
-| **New LLMs / Lab Tools** | Anthropic ships Claude Code Channels; OpenAI acquires Astral; xAI leadership purge; Meta model struggles |
-| **FOSS / Open-Weight** | NVIDIA NemoClaw wraps OpenClaw with security + open Nemotron models |
-| **Financial Moves** | Anthropic closes to 24.4% market share; Cursor at $50B; OpenAI double acquisition (Astral + Promptfoo) |
-| **Data Centers** | NVIDIA Vera Rubin (10x perf/watt); $1T pipeline; Nebius $150B facility faces legal block; labor shortage binding |
-| **Regulation & Policy** | DOJ vs Anthropic First Amendment case; Pentagon users resist Claude ban; classified training planned; EU softening AI Act |
-| **Australia** | Anthropic exec visit late March; no AI-specific legislation expected |
-| **Workflows & Tactics** | NSTR |
-| **Notable Voices** | Karpathy's autoresearch: 700 autonomous experiments, 20 real optimizations found |
-| **Podcast Highlights** | Meta may license Gemini; Cursor $50B; 81% doctors using AI |
-
----
-
-*Classification: UNCLASSIFIED // FOUO*
 *Prepared: 2026-03-20*
 *Next brief: 2026-03-21*
-
----
-
-*Sources: AI News (MIT Tech Review), Andrej Karpathy, Google AI Blog, OpenAI Blog, Pablo (pablof7z), Peter Steinberg*

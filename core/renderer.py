@@ -74,5 +74,5 @@ def _md_to_html(content):
     )
     return markdown.markdown(
         content,
-        extensions=["tables", "fenced_code"],
+        extensions=["tables", "fenced_code", "toc"],
     )
