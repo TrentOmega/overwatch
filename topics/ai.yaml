@@ -100,7 +100,7 @@ synthesis:
       scope: "Noteworthy posts and insights from Andrej Karpathy, Peter Steinberg (steipete), and Pablo (pablof7z)"
 
     - name: "Podcast Highlights"
-      scope: "Key topics and summaries from the AI Daily Brief podcast. For each topic covered: what is it, is it available now, how do you use it (specific steps/links if possible), and why it matters. Go beyond headlines — give the reader enough to act on."
+      scope: "Key topics and summaries from the AI Daily Brief podcast. For each topic covered: what is it, is it available now, how do you use it (specific steps/links if possible), and why it matters. Go beyond headlines — give the reader enough to act on. For each topic, include direct links to the references, papers, tools, or announcements discussed. If the podcast does not cite specific references, search the web for the most reliable primary sources (official blogs, papers, docs) and include those links."
 
   format_rules: |
     For each category:
@@ -108,10 +108,11 @@ synthesis:
     - Do NOT add filler explanations when a category is NSTR
     - For items with updates include:
       - Date
-      - Working primary-source link (prefer official source or Reuters)
+      - Working primary-source link that goes DIRECTLY to the specific article, blog post, announcement, or resource — NOT a homepage, search page, or generic landing page. Prefer official source or Reuters.
       - Short plain-English summary
       - Short "Why it matters"
     - Keep each item concise
+    - NEVER link to a site's homepage or generic page when a direct article URL is available. Every link must point to the specific content being referenced.
 
     After all categories, include a compact summary table.
     Use categories as rows and a short status/signal as the value.

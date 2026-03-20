@@ -195,7 +195,9 @@ CRITICAL INSTRUCTIONS:
 - Include ALL 9 categories in order, each with its own ## heading
 - End with the summary table
 - Use ALL the source material above — do not search the web again
-- Do NOT output meta-commentary about what changed — just produce the brief itself""")
+- Do NOT output meta-commentary about what changed — just produce the brief itself
+- Every link MUST point directly to the specific article, blog post, or resource — NEVER link to a homepage, search page, or generic landing page
+- For podcast highlights, include direct links to references/papers/tools discussed. If the podcast did not cite specific sources, find and link the most reliable primary source yourself""")
 
     return "\n".join(parts)
 
