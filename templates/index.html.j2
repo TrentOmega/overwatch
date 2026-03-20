@@ -56,7 +56,7 @@
         .brief-list a:hover {
             color: #7ecde8;
         }
-        .byline {
+        .outline {
             color: #999;
             font-size: 0.85rem;
         }
@@ -79,7 +79,7 @@
         <h2>{{ topic.name }}</h2>
         <ul class="brief-list">
             {% for brief in topic.briefs %}
-            <li><a href="{{ brief.path }}">{{ brief.date }}</a>{% if brief.byline %} <span class="byline">— {{ brief.byline }}</span>{% endif %}</li>
+            <li><a href="{{ brief.path }}">{{ brief.date }}</a>{% if brief.outline %} <span class="outline">— {{ brief.outline }}</span>{% endif %}</li>
             {% endfor %}
         </ul>
     </div>

@@ -5,8 +5,8 @@ import markdown
 from jinja2 import Environment, FileSystemLoader
 
 
-def _generate_byline(content, max_items=3, max_len=60):
-    """Extract a short slug-friendly byline from the first bold headlines in the content."""
+def _generate_outline(content, max_items=3, max_len=60):
+    """Extract a short slug-friendly outline title from the first bold headlines in the content."""
     headlines = re.findall(r'\*\*(.+?)\*\*', content)
     # Skip very short or generic matches
     headlines = [h for h in headlines if len(h) > 5 and not h.startswith("Why")]
@@ -22,8 +22,8 @@ def _generate_byline(content, max_items=3, max_len=60):
         if s and s not in seen:
             seen.add(s)
             slugs.append(s)
-    byline = '_'.join(slugs)
-    return byline[:max_len].rstrip('-_') if byline else ""
+    outline = '_'.join(slugs)
+    return outline[:max_len].rstrip('-_') if outline else ""
 
 
 def render(content, topic_config, items, date_str, output_dir="output", templates_dir="templates"):
@@ -36,8 +36,8 @@ def render(content, topic_config, items, date_str, output_dir="output", template
     source_names = sorted(set(item["source_name"] for item in items if item.get("source_name")))
 
     content_html = _md_to_html(content)
-    byline = _generate_byline(content)
-    basename = f"{date_str}_{byline}" if byline else date_str
+    outline = _generate_outline(content)
+    basename = f"{date_str}_{outline}" if outline else date_str
 
     context = {
         "topic_name": topic_config["name"],

@@ -21,7 +21,7 @@ def _generate_index(output_dir="output", topics_dir="topics"):
                 except Exception:
                     topic_names[slug] = slug.replace("-", " ").title()
 
-    # Scan output/ for {slug}/{date}[_{byline}].html files
+    # Scan output/ for {slug}/{date}[_{outline}].html files
     topics = {}
     html_files = glob.glob(os.path.join(output_dir, "*", "*.html"))
     for path in html_files:
@@ -30,16 +30,16 @@ def _generate_index(output_dir="output", topics_dir="topics"):
         if len(parts) >= 2:
             slug = parts[-2]
             filename = os.path.splitext(parts[-1])[0]
-            # Parse date and optional byline from filename
+            # Parse date and optional outline title from filename
             if '_' in filename:
                 date = filename[:10]  # YYYY-MM-DD
-                byline = filename[11:].replace('_', ', ').replace('-', ' ')
+                outline = filename[11:].replace('_', ', ').replace('-', ' ')
             else:
                 date = filename
-                byline = ""
+                outline = ""
             topics.setdefault(slug, []).append({
                 "date": date,
-                "byline": byline,
+                "outline": outline,
                 "path": rel,
             })
 
