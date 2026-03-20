@@ -91,18 +91,193 @@
         <div class="meta">2026-03-20 · 50 items collected · Overwatch</div>
     </header>
     <div class="content">
-        <p>Brief updated at <code>output/ai/2026-03-20.md</code>. Key changes from the previous version:</p>
+        <h1>AI Daily Brief — 2026-03-20</h1>
+<hr />
+<h2>1. New LLM Versions / Major AI Lab Tools</h2>
+<p><strong>OpenAI monitors internal coding agents for misalignment</strong> — 2026-03-19
+<a href="https://openai.com/index/how-we-monitor-internal-coding-agents-misalignment">openai.com</a>
+OpenAI published details on using chain-of-thought monitoring to detect misalignment in its internal coding agents deployed in real-world settings. This is a safety research disclosure, not a product launch.
+<em>Why it matters:</em> First detailed public account of how a frontier lab monitors its own agentic deployments for deceptive or misaligned behavior in production.</p>
+<p><strong>OpenAI acquires Astral</strong> — 2026-03-19
+<a href="https://openai.com/index/openai-to-acquire-astral">openai.com</a>
+OpenAI announced acquisition of Astral to accelerate Codex growth and power next-generation Python developer tools.
+<em>Why it matters:</em> Signals OpenAI is vertically integrating developer tooling around Codex, not just selling API access.</p>
+<p><strong>Anthropic ships Claude Code Channels (Discord &amp; Telegram)</strong> — 2026-03-20
+<a href="https://venturebeat.com/orchestration/anthropic-just-shipped-an-openclaw-killer-called-claude-code-channels">venturebeat.com</a>
+Developers can now message Claude Code via Telegram and Discord bots for asynchronous coding tasks. Uses MCP protocol. Positioned against OpenClaw's agent messaging.
+<em>Why it matters:</em> Extends Claude Code beyond terminal/IDE into chat platforms where many dev teams already coordinate — a distribution play.</p>
+<p><strong>xAI being "rebuilt from the foundations up"</strong> — 2026-03-19
+<a href="https://www.zerohedge.com/markets/meta-delays-ai-rollout-because-it-sucks-may-license-gemini-musk-reboots-xai-foundations">zerohedge.com</a>
+Musk forced out xAI co-founders Zihang Dai and Guodong Zhang over coding shortfalls. xAI is being rebuilt from scratch. Separately, Meta's next model ("Avocado") underperformed Gemini 3.0; Meta reportedly considering licensing Google's Gemini.
+<em>Why it matters:</em> Two major labs showing signs of distress — xAI with a leadership purge, Meta potentially outsourcing its frontier model. Competitive landscape shifting.</p>
+<p><strong>Google Gemini Workspace expansion</strong> — 2026-03-20
+<a href="https://blog.google/products-and-workspace/products/workspace/gemini-workspace-updates-march-2026/">blog.google</a>
+Google rolling out enhanced Gemini integration across Docs, Sheets, Slides, and Drive in beta for AI Ultra and Pro subscribers.
+<em>Why it matters:</em> Incremental but steady embedding of Gemini into the productivity stack used by billions.</p>
+<p><strong>UK regulators issue formal demand to xAI over Grok deepfakes</strong> — 2026-03-19
+<a href="https://x.ai/news">x.ai/news</a>
+The UK ICO and Ofcom formally demanded xAI address Grok's image generation capabilities over non-consensual deepfake concerns.
+<em>Why it matters:</em> First coordinated UK regulatory action specifically targeting an AI image generator for deepfake risk.</p>
+<hr />
+<h2>2. FOSS / Open-Weight LMs &amp; Tools</h2>
+<p><strong>NVIDIA releases NemoClaw — open-source security stack for OpenClaw</strong> — 2026-03-19
+<a href="https://blogs.nvidia.com/blog/rtx-ai-garage-gtc-2026-nemoclaw/">blogs.nvidia.com</a>
+NemoClaw optimizes OpenClaw for NVIDIA hardware with enhanced security and local model support. Paired with Nemotron 3 Nano 4B and Super 120B open models for local agent workloads.
+<em>Why it matters:</em> NVIDIA is wrapping OpenClaw in enterprise-grade security and optimization — legitimizing it for production use while anchoring it to NVIDIA silicon.</p>
+<p><strong>MiroMind releases MiroThinker models for verifiable reasoning</strong> — 2026-03-17
+<a href="https://www.digitimes.com/news/a20260317VL207/ai-llm-legal-2026.html">digitimes.com</a>
+MiroThinker-1.7 and MiroThinker-H1 use verification-centric architecture for multi-step reasoning, targeting legal and compliance.
+<em>Why it matters:</em> Niche but noteworthy — purpose-built reasoning models for domains where accuracy is non-negotiable.</p>
+<hr />
+<h2>3. Major Financial AI Company News</h2>
+<p><strong>Anthropic market share narrows gap with OpenAI</strong> — 2026-03-19
+<a href="https://www.theregister.com/2026/03/19/anthropic_claude_market_share/">theregister.com</a>
+Anthropic business subscriptions grew 4.9% MoM in February. Market share: Anthropic 24.4% vs OpenAI 34.4%.
+<em>Why it matters:</em> The gap is closing materially. Anthropic is now a credible second player, not a distant follower.</p>
+<p><strong>OpenAI acquires Promptfoo</strong> — 2026-03-09
+<a href="https://openai.com/index/openai-to-acquire-promptfoo">openai.com</a>
+OpenAI acquiring Promptfoo, an AI security platform for identifying and remediating vulnerabilities in AI systems during development.
+<em>Why it matters:</em> Second acquisition announced this cycle (Astral + Promptfoo). OpenAI building a full-stack developer and security platform around its models.</p>
+<p><strong>Nscale closes $2B Series C — largest European VC round ever</strong> — 2026-03-09
+<a href="https://www.nscale.com/press-releases/nscale-series-c">nscale.com</a>
+UK AI infrastructure hyperscaler valued at $14.6B. Backed by NVIDIA, Dell, Citadel. Sheryl Sandberg and Nick Clegg join board.
+<em>Why it matters:</em> European AI infra is attracting serious capital. Board appointments signal political and operational gravitas.</p>
+<p><strong>Cursor reportedly seeking $50B valuation</strong> — 2026-03-19
+<a href="https://aidailybrief.ai/">aidailybrief.ai</a>
+AI code editor Cursor seeking funding at a $50B valuation.
+<em>Why it matters:</em> If confirmed, this would make an AI-native IDE one of the most valuable private software companies. Signals how much value the market sees in AI-augmented developer tools.</p>
+<hr />
+<h2>4. Major AI Data Center News</h2>
+<p><strong>NVIDIA GTC 2026: Vera Rubin, $1T pipeline, space computing</strong> — 2026-03-19
+<a href="https://blogs.nvidia.com/blog/gtc-2026-news/">blogs.nvidia.com</a>
+Key announcements: Vera Rubin platform (10x perf/watt over Grace Blackwell), $1T cumulative order pipeline through 2027, healthcare robotics platform, and a space computing platform for orbital AI data centers.
+<em>Why it matters:</em> Vera Rubin sets the next performance ceiling. The $1T pipeline number, if real, indicates demand is not slowing. Space computing is early but signals NVIDIA positioning for sovereign/defense compute.</p>
+<p><strong>NVIDIA launches space computing for orbital AI</strong> — 2026-03-19
+<a href="https://nvidianews.nvidia.com/news/space-computing">nvidianews.nvidia.com</a>
+Accelerated computing platforms for orbital data centers enabling AI compute in space for geospatial intelligence and autonomous operations.
+<em>Why it matters:</em> Niche now, strategic later — geospatial AI processing at the edge of space removes latency for defense and earth observation.</p>
+<p><strong>Nebius $150B AI data center faces legal challenge in Missouri</strong> — 2026-03-19
+<a href="https://www.kctv5.com/2026/03/19/independence-residents-get-more-time-fight-100-billion-ai-data-center/">kctv5.com</a>
+Judge issued temporary hold on referendum deadlines for Nebius's proposed hyperscale AI factory in Independence, MO — would be the largest in the U.S. Residents' legal effort to force a public vote remains alive. Next hearing March 23.
+<em>Why it matters:</em> Community resistance to hyperscale AI infra is becoming a real constraint. This is the largest proposed facility in the country.</p>
+<p><strong>Meta ramps data center investment; trade worker shortage intensifies</strong> — 2026-03-19 / 2026-03-18
+<a href="https://www.fool.com/investing/2026/03/19/meta-platforms-incredible-news-to-ai-company/">fool.com</a> | <a href="https://www.cnbc.com/2026/03/18/ai-data-center-buildout-jobs-salary-skilled-traders-worker-shortage.html">cnbc.com</a>
+Meta announced significant new data center partnership as part of $700B+ collective big tech capex in 2026 (60% over 2025). Meanwhile, the buildout is driving 25-30% pay increases for trade workers, with 349K new workers needed in 2026 and ~500K by 2027.
+<em>Why it matters:</em> Labor is becoming the binding constraint on AI infrastructure buildout, not capital or chips.</p>
+<p><strong>Dell, HPE launch AI infrastructure at GTC</strong> — 2026-03-19
+<a href="https://www.datacenterknowledge.com/ai-data-centers/dell-hpe-and-others-unveil-ai-innovations-at-gtc-2026">datacenterknowledge.com</a>
+New AI servers, storage systems, and managed "AI factory" stacks differentiating above the silicon layer.
+<em>Why it matters:</em> The infrastructure stack above NVIDIA silicon is commoditizing fast. Dell and HPE racing to own the integration layer.</p>
+<hr />
+<h2>5. Regulation &amp; Policy</h2>
+<p><strong>DOJ urges court to reject Anthropic's First Amendment defense</strong> — 2026-03-19
+<a href="https://thehill.com/policy/technology/5790299-trump-administration-pentagon-anthropic-lawsuit/">thehill.com</a>
+Trump DOJ filed brief urging court to reject Anthropic's First Amendment argument in the legal battle over Pentagon restrictions on Claude in classified systems.
+<em>Why it matters:</em> This case could set precedent on whether AI model outputs constitute protected speech and whether the government can restrict specific vendors from classified environments on policy grounds.</p>
+<p><strong>Pentagon users resist Hegseth's order to dump Claude</strong> — 2026-03-19
+<a href="https://www.usnews.com/news/top-news/articles/2026-03-19/hegseth-wants-pentagon-to-dump-anthropics-claude-but-military-users-say-its-not-so-easy">usnews.com</a>
+Despite Hegseth's March 3 supply chain risk designation for Anthropic, Pentagon staff and IT contractors are dragging feet on removal, calling Claude superior to alternatives.
+<em>Why it matters:</em> Gap between political directive and operational reality. Demonstrates how embedded AI tools become in institutional workflows.</p>
+<p><strong>Pentagon planning classified AI training environments</strong> — 2026-03-17
+<a href="https://www.technologyreview.com/2026/03/17/1134351/the-pentagon-is-planning-for-ai-companies-to-train-on-classified-data-defense-official-says/">technologyreview.com</a>
+Pentagon discussing secure environments for AI companies to train military-specific model variants on classified data.
+<em>Why it matters:</em> Crosses a significant threshold — fine-tuning frontier models on classified intelligence data, not just using them for inference.</p>
+<p><strong>Federal push to preempt state AI regulation analyzed</strong> — 2026-03-19
+<a href="https://www.ropesgray.com/en/insights/alerts/2026/03/examining-the-landscape-and-limitations-of-the-federal-push-to-override-state-ai-regulation">ropesgray.com</a>
+Commerce Department identified burdensome state AI laws on March 11; FTC issued Section 5 policy statement on AI. Both are key milestones under Trump's federal AI preemption executive order.
+<em>Why it matters:</em> Federal preemption of state AI laws would create a single regulatory regime — potentially looser — for the entire U.S. market.</p>
+<p><strong>EU Council agrees position on AI rules streamlining (Omnibus VII)</strong> — 2026-03-13
+<a href="https://www.consilium.europa.eu/en/press/press-releases/2026/03/13/council-agrees-position-to-streamline-rules-on-artificial-intelligence/">consilium.europa.eu</a>
+EU Council adopted negotiating position to reduce regulatory burden while maintaining safety standards under the AI Act.
+<em>Why it matters:</em> Signals EU is already walking back some AI Act complexity before full enforcement — responding to industry competitiveness concerns.</p>
+<hr />
+<h2>6. Australia — AI News</h2>
+<p><strong>Anthropic deepening Australia engagement</strong> — 2026-03-19
+<a href="https://www.anthropic.com/news/sydney-fourth-office-asia-pacific">anthropic.com</a>
+Anthropic executive team visiting Australia late March to formalize partnerships with customers and policymakers on national interest and priority sector projects.
+<em>Why it matters:</em> Anthropic is making Australia a strategic priority in APAC — likely tied to defense, government, and critical infrastructure opportunities.</p>
+<p><strong>Australia unlikely to pass AI-specific legislation</strong> — 2026-03-19
+<a href="https://www.asauthors.org.au/news/ai-latest-developments-march-2026/">asauthors.org.au</a>
+Australian Society of Authors notes Australia will rely on existing technology-neutral laws rather than introduce AI-specific legislation.
+<em>Why it matters:</em> Confirms Australia's regulatory posture: no dedicated AI law on the horizon. Existing frameworks (privacy, copyright, consumer law) will be stretched to cover AI.</p>
+<hr />
+<h2>7. AI Workflows &amp; Tactics</h2>
+<p>NSTR</p>
+<hr />
+<h2>8. Notable Voices</h2>
+<p><strong>Andrej Karpathy — autoresearch framework</strong> — 2026-03-17
+<a href="https://fortune.com/2026/03/17/andrej-karpathy-loop-autonomous-ai-agents-future/">fortune.com</a>
+Karpathy's open-source "autoresearch" framework lets AI agents autonomously run ML experiments on a single GPU. In a demo run, the agent executed 700 experiments over two days and discovered 20 optimizations improving training time for a small language model.
+<em>Why it matters:</em> Practical demonstration that autonomous AI research loops can find real optimizations — not just a demo, but a usable tool. Available now on GitHub.</p>
+<p><strong>Peter Steinberg (@steipete)</strong> — No significant posts in the last 24 hours. NSTR.</p>
+<p><strong>Pablo (pablof7z)</strong> — Minor Nostr posts; nothing AI-relevant. NSTR.</p>
+<hr />
+<h2>9. Podcast Highlights</h2>
+<p><strong>AI Daily Brief — Key topics covered</strong> — 2026-03-19
+<a href="https://aidailybrief.ai/">aidailybrief.ai</a></p>
 <ul>
-<li><strong>Added</strong> MiniMax M2.7 self-evolving model (new frontier competitor)</li>
-<li><strong>Added</strong> Anthropic's 80,508-user qualitative study</li>
-<li><strong>Updated</strong> Apple Siri status — latest source indicates late March release is imminent (contradicting earlier "delayed again" framing)</li>
-<li><strong>Added</strong> AI chip emissions +33% data center story</li>
-<li><strong>Retained</strong> all high-signal items from prior version (Micron, Meta-Nebius, AMI Labs, Blackburn bill, Pentagon classified training, Karpathy autoresearch)</li>
+<li><strong>Meta delays next AI model ("Avocado")</strong> — underperformed Gemini 3.0; Meta reportedly exploring licensing Google's Gemini. Significant if confirmed — would mark first time a big-tech lab outsources its frontier model.</li>
+<li><strong>Cursor seeking $50B valuation</strong> — AI code editor raising at a valuation that would place it among the most valuable private software companies globally.</li>
+<li><strong>Anthropic exploring enterprise consulting</strong> — moving beyond API sales into hands-on implementation services.</li>
+<li><strong>NVIDIA NemoClaw</strong> — open-source security stack wrapping OpenClaw for enterprise use on NVIDIA hardware.</li>
+<li><strong>Manus and Adaptive launch desktop agents</strong> — new entrants in the desktop automation space competing with OpenClaw.</li>
+<li><strong>81% of doctors already use AI</strong> — adoption data suggesting healthcare AI has crossed from early-adopter to mainstream.</li>
 </ul>
-<p>Top signals today: OpenAI's dual acquisitions (Astral + Promptfoo), MiniMax's self-improving model, and the Blackburn AI bill's copyright provision declaring AI training on copyrighted works is not fair use.</p>
+<hr />
+<h2>Summary Table</h2>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>New LLMs / Lab Tools</strong></td>
+<td>Anthropic ships Claude Code Channels; OpenAI acquires Astral; xAI leadership purge; Meta model struggles</td>
+</tr>
+<tr>
+<td><strong>FOSS / Open-Weight</strong></td>
+<td>NVIDIA NemoClaw wraps OpenClaw with security + open Nemotron models</td>
+</tr>
+<tr>
+<td><strong>Financial Moves</strong></td>
+<td>Anthropic closes to 24.4% market share; Cursor at $50B; OpenAI double acquisition (Astral + Promptfoo)</td>
+</tr>
+<tr>
+<td><strong>Data Centers</strong></td>
+<td>NVIDIA Vera Rubin (10x perf/watt); $1T pipeline; Nebius $150B facility faces legal block; labor shortage binding</td>
+</tr>
+<tr>
+<td><strong>Regulation &amp; Policy</strong></td>
+<td>DOJ vs Anthropic First Amendment case; Pentagon users resist Claude ban; classified training planned; EU softening AI Act</td>
+</tr>
+<tr>
+<td><strong>Australia</strong></td>
+<td>Anthropic exec visit late March; no AI-specific legislation expected</td>
+</tr>
+<tr>
+<td><strong>Workflows &amp; Tactics</strong></td>
+<td>NSTR</td>
+</tr>
+<tr>
+<td><strong>Notable Voices</strong></td>
+<td>Karpathy's autoresearch: 700 autonomous experiments, 20 real optimizations found</td>
+</tr>
+<tr>
+<td><strong>Podcast Highlights</strong></td>
+<td>Meta may license Gemini; Cursor $50B; 81% doctors using AI</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><em>Classification: UNCLASSIFIED // FOUO</em>
+<em>Prepared: 2026-03-20</em>
+<em>Next brief: 2026-03-21</em></p>
     </div>
     <footer>
-        Sources: AI Daily Brief, AI News (MIT Tech Review), Andrej Karpathy, Google AI Blog, OpenAI Blog, Pablo (pablof7z), Peter Steinberg
+        Sources: AI News (MIT Tech Review), Andrej Karpathy, Google AI Blog, OpenAI Blog, Pablo (pablof7z), Peter Steinberg
     </footer>
 </body>
 </html>
