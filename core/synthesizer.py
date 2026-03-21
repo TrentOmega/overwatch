@@ -199,8 +199,8 @@ CRITICAL INSTRUCTIONS:
 - This is NOT an update or diff — produce the entire document from scratch
 - Start with a markdown heading: "# AI Daily Brief — YYYY-MM-DD"
 - Do NOT include any classification statement (e.g. "Classification: OPEN SOURCE" or "Period:" lines) — omit these entirely
-- Immediately after the heading, include the Summary Table with category names as clickable anchor links to their sections below
-- Then include ALL 9 categories in order, each with its own ## heading
+- Immediately after the heading, include the Summary Table. Each row must have a NUMBERED category name (e.g. "1. New LLMs / Lab Tools") as a clickable anchor link to its section below
+- Then include ALL 9 categories in order, each with its own NUMBERED ## heading (e.g. "## 1. New LLM Versions / Major AI Lab Tools")
 - End with: *Prepared: YYYY-MM-DD* and *Next brief: YYYY-MM-DD*
 - Use ALL the source material above — do not search the web again
 - Do NOT output meta-commentary about what changed — just produce the brief itself
