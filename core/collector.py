@@ -6,6 +6,8 @@ import yaml
 
 from sources import rss, api, scraper, youtube, social
 
+# Both youtube_channel and youtube_search map to the same youtube module;
+# youtube.fetch() dispatches internally based on source["type"].
 ADAPTERS = {
     "rss": rss,
     "api": api,

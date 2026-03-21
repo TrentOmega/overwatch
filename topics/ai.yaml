@@ -82,6 +82,14 @@ sources:
       - https://natolambert.com
 
   - type: social
+    name: Jakub Pachocki (OpenAI)
+    platform: x
+    handle: merettm
+    urls:
+      - https://x.com/merettm
+      - https://scholar.harvard.edu/meret/home
+
+  - type: social
     name: Sebastian Raschka (Ai2)
     platform: x
     handle: rasbt
@@ -124,7 +132,7 @@ synthesis:
       scope: "Top tactical and actionable AI workflows extracted from YouTube videos with high view counts. For each workflow: what it does, what tools/models it uses, step-by-step how to set it up, and whether it's available now. Focus on practical, reproducible techniques the reader can implement today."
 
     - name: "Notable Voices"
-      scope: "Noteworthy posts and insights from Andrej Karpathy, Peter Steinberg (steipete), Pablo (pablof7z), Dylan Patel (SemiAnalysis), Nathan Lambert (Ai2/Interconnects), and Sebastian Raschka (Ai2/Ahead of AI)"
+      scope: "Noteworthy posts and insights from Andrej Karpathy, Peter Steinberg (steipete), Pablo (pablof7z), Dylan Patel (SemiAnalysis), Nathan Lambert (Ai2/Interconnects), Jakub Pachocki (OpenAI Chief Scientist, @merettm), and Sebastian Raschka (Ai2/Ahead of AI)"
 
     - name: "Podcast Highlights"
       scope: "Key topics and summaries from the AI Daily Brief podcast. For each topic covered: what is it, is it available now, how do you use it (specific steps/links if possible), and why it matters. Go beyond headlines — give the reader enough to act on. For each topic, include direct links to the references, papers, tools, or announcements discussed. If the podcast does not cite specific references, search the web for the most reliable primary sources (official blogs, papers, docs) and include those links."
@@ -141,7 +149,10 @@ synthesis:
     - Keep each item concise
     - NEVER link to a site's homepage or generic page when a direct article URL is available. Every link must point to the specific content being referenced.
 
-    After all categories, include a compact summary table.
+    Do NOT include any classification statement (e.g. "Classification: OPEN SOURCE" or "Period:" lines).
+
+    Place the summary table IMMEDIATELY after the brief heading, BEFORE the category sections.
+    Each category name in the summary table must be a clickable markdown anchor link to its section below.
     Use categories as rows and a short status/signal as the value.
 
   focus_areas:

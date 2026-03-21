@@ -4,7 +4,7 @@
 import argparse
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 import yaml
 
@@ -64,7 +64,7 @@ def run_topic(slug, global_config, dry_run=False):
 
     # Render
     print("\n[3/4] Rendering output...")
-    date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    date_str = datetime.now(timezone(timedelta(hours=10))).strftime("%Y-%m-%d")
     md_path, html_path = render(content, topic_config, items, date_str, output_dir)
 
     if dry_run:

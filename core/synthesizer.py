@@ -1,7 +1,9 @@
 import json
 import os
 import subprocess
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
+
+_AEST = timezone(timedelta(hours=10))
 
 
 def synthesize(items, topic_config, model=None):
@@ -20,7 +22,7 @@ def synthesize(items, topic_config, model=None):
 
 def _research_phase(items, topic_config, model):
     """Have Claude search the web for news the structured sources may have missed."""
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = datetime.now(_AEST).strftime("%Y-%m-%d")
     synthesis_config = topic_config.get("synthesis", {})
 
     categories = synthesis_config.get("categories", [])
@@ -94,6 +96,8 @@ def _run_claude(prompt, model=None):
     if model:
         cmd.extend(["--model", model])
 
+    # Strip CLAUDECODE env var to avoid conflicts with parent Claude session.
+    # Run from /tmp so the subprocess doesn't pick up project-level .claude config.
     env = {k: v for k, v in os.environ.items() if k != "CLAUDECODE"}
     result = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=600, env=env, cwd="/tmp")
 
@@ -105,13 +109,15 @@ def _run_claude(prompt, model=None):
 
 def _build_prompt(items, research_items, topic_config, synthesis_config):
     """Build the full synthesis prompt with all sources and format rules."""
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = datetime.now(_AEST).strftime("%Y-%m-%d")
 
     # Separate collected items by type
     general_items = []
     transcript_items = []
     social_items = []
 
+    # Categorize items for prompt structure. Social items are detected by title
+    # format: social.py includes "(@handle)" for X and "(Nostr)" for Nostr posts.
     for item in items:
         purpose = item.get("purpose", "")
         if purpose in ("podcast_summary", "workflow_extraction"):
@@ -192,8 +198,10 @@ CRITICAL INSTRUCTIONS:
 - Output the FULL brief with ALL categories populated (or marked NSTR)
 - This is NOT an update or diff — produce the entire document from scratch
 - Start with a markdown heading: "# AI Daily Brief — YYYY-MM-DD"
-- Include ALL 9 categories in order, each with its own ## heading
-- End with the summary table
+- Do NOT include any classification statement (e.g. "Classification: OPEN SOURCE" or "Period:" lines) — omit these entirely
+- Immediately after the heading, include the Summary Table with category names as clickable anchor links to their sections below
+- Then include ALL 9 categories in order, each with its own ## heading
+- End with: *Prepared: YYYY-MM-DD* and *Next brief: YYYY-MM-DD*
 - Use ALL the source material above — do not search the web again
 - Do NOT output meta-commentary about what changed — just produce the brief itself
 - Every link MUST point directly to the specific article, blog post, or resource — NEVER link to a homepage, search page, or generic landing page
@@ -225,5 +233,5 @@ def _format_items(items, include_full_summary=False):
 
 def _empty_brief(topic_config):
     """Return a placeholder when no items were collected."""
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = datetime.now(_AEST).strftime("%Y-%m-%d")
     return f"# {topic_config['name']} Brief — {today}\n\nNo new items collected for this period."

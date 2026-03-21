@@ -6,9 +6,22 @@
 
 # AI Daily Brief — 2026-03-20
 
-**Classification:** OPEN SOURCE | **Period:** 2026-03-19 0000Z – 2026-03-20 2100Z
+## Summary Table
+
+| Category | Signal |
+|---|---|
+| [**New LLMs / Lab Tools**](#1-new-llm-versions--major-ai-lab-tools) | OpenAI pivots to autonomous AI researcher; acquires Astral (ruff/uv); publishes agent misalignment monitoring. Apple/Gemini Siri imminent. |
+| [**FOSS / Open-Weight**](#2-foss--open-weight-lms--tools) | Helios 14B: real-time open-source video gen on single GPU. Red Hat BYOA + OpenClaw at KubeCon. |
+| [**Financial Moves**](#3-major-financial-ai-company-news) | Supermicro co-founder charged ($2.5B chip smuggling). Uber-Rivian $1.25B robotaxi deal. Britannica sues OpenAI (novel Lanham Act angle). |
+| [**Data Centers**](#4-major-ai-data-center-news) | NTT doubling to 4GW; 70% pre-leased. ~$13M/MW benchmark. |
+| [**Regulation & Policy**](#5-regulation--policy) | White House AI framework seeks federal preemption of state AI laws. |
+| [**Australia**](#6-australia--ai-news) | Anthropic Sydney office open; AU ranks #4 globally in per-capita Claude usage. |
+| [**Workflows & Tactics**](#7-ai-workflows--tactics) | NSTR |
+| [**Notable Voices**](#8-notable-voices) | NSTR |
+| [**Podcasts**](#9-podcast-highlights) | Anthropic study: 81K users reveal coexisting AI hopes (productivity) and fears (cognitive atrophy). |
 
 ---
+
 
 ## 1. New LLM Versions / Major AI Lab Tools
 
@@ -132,20 +145,6 @@ NSTR — Social media items for this period contained only research directives, 
 - **Why it matters:** Largest known survey of frontier AI users by the AI provider itself. The coexistence of hope and fear in the same users challenges simplistic narratives. The "cognitive atrophy" concern — users worrying AI will make them less capable — is an emerging theme worth tracking.
 
 ---
-
-## Summary Table
-
-| Category | Signal |
-|---|---|
-| **New LLMs / Lab Tools** | OpenAI pivots to autonomous AI researcher; acquires Astral (ruff/uv); publishes agent misalignment monitoring. Apple/Gemini Siri imminent. |
-| **FOSS / Open-Weight** | Helios 14B: real-time open-source video gen on single GPU. Red Hat BYOA + OpenClaw at KubeCon. |
-| **Financial Moves** | Supermicro co-founder charged ($2.5B chip smuggling). Uber-Rivian $1.25B robotaxi deal. Britannica sues OpenAI (novel Lanham Act angle). |
-| **Data Centers** | NTT doubling to 4GW; 70% pre-leased. ~$13M/MW benchmark. |
-| **Regulation & Policy** | White House AI framework seeks federal preemption of state AI laws. |
-| **Australia** | Anthropic Sydney office open; AU ranks #4 globally in per-capita Claude usage. |
-| **Workflows & Tactics** | NSTR |
-| **Notable Voices** | NSTR |
-| **Podcasts** | Anthropic study: 81K users reveal coexisting AI hopes (productivity) and fears (cognitive atrophy). |
 
 ---
 

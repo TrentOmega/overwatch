@@ -3,14 +3,54 @@ slug: topic-slug
 schedule: daily  # daily, weekly, monthly
 
 sources:
+  # --- RSS feeds ---
   - type: rss
     name: Source Name
     url: https://example.com/feed.xml
 
+  # --- YouTube channel (latest videos, optional transcript extraction) ---
+  # - type: youtube_channel
+  #   name: Channel Name
+  #   channel_url: https://www.youtube.com/@ChannelHandle
+  #   max_videos: 3                    # default: 3
+  #   extract: transcript              # omit to skip transcript extraction
+  #   purpose: podcast_summary         # or "workflow_extraction" — controls prompt categorization
+
+  # --- YouTube search (find videos by query, filter by views/recency) ---
+  # - type: youtube_search
+  #   name: Search Label
+  #   query: "search terms here"
+  #   period_hours: 24                 # default: 24 — only videos published within this window
+  #   min_views: 10000                 # default: 10000
+  #   max_results: 10                  # default: 10
+  #   extract: transcript
+  #   purpose: workflow_extraction
+
+  # --- X/Twitter monitoring (returns research directive for Claude to fill) ---
+  # - type: social
+  #   name: Person Name
+  #   platform: x
+  #   handle: twitter_handle           # without @
+  #   urls:
+  #     - https://x.com/twitter_handle
+  #     - https://their-blog.com       # optional additional URLs for context
+
+  # --- Nostr monitoring (direct WebSocket relay queries) ---
+  # - type: social
+  #   name: Person Name
+  #   platform: nostr
+  #   handle: nostr_handle
+  #   pubkey: hex_pubkey_here          # required for relay queries
+  #   nip05: user@domain.com           # optional, for pubkey resolution
+  #   urls:
+  #     - https://primal.net/handle
+
+  # --- API adapter (not yet implemented) ---
   # - type: api
   #   adapter: arxiv
   #   query: "search query"
 
+  # --- Web scraper (not yet implemented) ---
   # - type: scraper
   #   name: Source Name
   #   url: https://example.com/page
@@ -21,6 +61,33 @@ synthesis:
     You are an intelligence analyst producing a {schedule} brief on {name}.
     Analyze the collected items and produce a structured briefing that highlights
     the most significant developments, emerging trends, and key takeaways.
+
+  categories:
+    - name: "Category 1"
+      scope: "What belongs in this category"
+
+    - name: "Category 2"
+      scope: "What belongs in this category"
+
+    # Add as many categories as needed. Each becomes a ## section in the brief.
+    # Claude outputs them in this exact order, numbered.
+
+  format_rules: |
+    For each category:
+    - If no meaningful updates, write only: "NSTR"
+    - Do NOT add filler explanations when a category is NSTR
+    - For items with updates include:
+      - Date
+      - Working primary-source link (direct to article, NOT homepage)
+      - Short plain-English summary
+      - Short "Why it matters"
+    - Keep each item concise
+    - Do NOT include any classification statement (e.g. "Classification: OPEN SOURCE" or "Period:" lines)
+
+    Place the summary table IMMEDIATELY after the brief heading, BEFORE the category sections.
+    Each category name in the summary table must be a clickable markdown anchor link to its section below.
+    Use categories as rows and a short status/signal as the value.
+
   focus_areas:
     - Area 1
     - Area 2
