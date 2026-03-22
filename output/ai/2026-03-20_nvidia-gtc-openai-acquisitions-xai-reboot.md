@@ -6,19 +6,17 @@
 
 # AI Daily Brief — 2026-03-20
 
-## Summary Table
-
-| Category | Signal |
-|---|---|
-| [**1. New LLMs / Lab Tools**](#1-new-llm-versions-major-ai-lab-tools) | Anthropic ships Claude Code Channels; OpenAI acquires Astral; xAI leadership purge; Meta model struggles |
-| [**2. FOSS / Open-Weight**](#2-foss-open-weight-lms-tools) | NVIDIA NemoClaw wraps OpenClaw with security + open Nemotron models |
-| [**3. Financial Moves**](#3-major-financial-ai-company-news) | Anthropic closes to 24.4% market share; Cursor at $50B; OpenAI double acquisition (Astral + Promptfoo) |
-| [**4. Data Centers**](#4-major-ai-data-center-news) | NVIDIA Vera Rubin (10x perf/watt); $1T pipeline; Nebius $150B facility faces legal block; labor shortage binding |
-| [**5. Regulation & Policy**](#5-regulation-policy) | DOJ vs Anthropic First Amendment case; Pentagon users resist Claude ban; classified training planned; EU softening AI Act |
-| [**6. Australia**](#6-australia-ai-news) | Anthropic exec visit late March; no AI-specific legislation expected |
-| [**7. Workflows & Tactics**](#7-ai-workflows-tactics) | NSTR |
-| [**8. Notable Voices**](#8-notable-voices) | Karpathy's autoresearch: 700 autonomous experiments, 20 real optimizations found |
-| [**9. Podcast Highlights**](#9-podcast-highlights) | Meta may license Gemini; Cursor $50B; 81% doctors using AI |
+| # | Category | Signal |
+|---|----------|--------|
+| 1 | [New LLMs / Lab Tools](#1-new-llm-versions-major-ai-lab-tools) | Anthropic ships Claude Code Channels; OpenAI acquires Astral; xAI leadership purge; Meta model struggles |
+| 2 | [FOSS / Open-Weight](#2-foss-open-weight-lms-tools) | NVIDIA NemoClaw wraps OpenClaw with security + open Nemotron models |
+| 3 | [Financial Moves](#3-major-financial-ai-company-news) | Anthropic closes to 24.4% market share; Cursor at $50B; OpenAI double acquisition (Astral + Promptfoo) |
+| 4 | [Data Centers](#4-major-ai-data-center-news) | NVIDIA Vera Rubin (10x perf/watt); $1T pipeline; Nebius $150B facility faces legal block; labor shortage binding |
+| 5 | [Regulation & Policy](#5-regulation-policy) | DOJ vs Anthropic First Amendment case; Pentagon users resist Claude ban; classified training planned; EU softening AI Act |
+| 6 | [Australia](#6-australia-ai-news) | Anthropic exec visit late March; no AI-specific legislation expected |
+| 7 | [Workflows & Tactics](#7-ai-workflows-tactics) | NSTR |
+| 8 | [Notable Voices](#8-notable-voices) | Karpathy's autoresearch: 700 autonomous experiments, 20 real optimizations found |
+| 9 | [Podcast Highlights](#9-podcast-highlights) | Meta may license Gemini; Cursor $50B; 81% doctors using AI |
 
 ---
 

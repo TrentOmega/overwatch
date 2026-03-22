@@ -33,7 +33,7 @@ sources:
     name: AI Workflows (YouTube)
     query: "AI Claude workflow automation"
     period_hours: 24
-    min_views: 10000
+    min_views: 1000
     max_results: 10
     extract: transcript
     purpose: workflow_extraction
@@ -152,9 +152,10 @@ synthesis:
     Do NOT include any classification statement (e.g. "Classification: OPEN SOURCE" or "Period:" lines).
 
     Place the summary table IMMEDIATELY after the brief heading, BEFORE the category sections.
-    Each row in the summary table must have a NUMBERED category name (e.g. "1. New LLMs / Lab Tools") as a clickable markdown anchor link to its section below.
+    The summary table must have three columns: #, Category, Signal.
+    Format each row as: | 1 | [Category Name](#anchor) | signal text |
+    The number column is plain text (NOT a link). The category name is the clickable anchor link.
     Category section headings must also be numbered (e.g. "## 1. New LLM Versions / Major AI Lab Tools").
-    Use categories as rows and a short status/signal as the value.
 
   focus_areas:
     - Foundation model releases and capabilities

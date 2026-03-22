@@ -8,15 +8,15 @@
 
 | # | Category | Signal |
 |---|----------|--------|
-| [1](#1-new-llm-versions--major-ai-lab-tools) | New LLMs / Lab Tools | MiniMax M2.7 "self-evolving" model released; Apple Siri revamp delayed again |
-| [2](#2-foss--open-weight-lms--tools) | FOSS / Open-Weight LMs & Tools | NVIDIA OpenClaw agentic framework launched at GTC |
-| [3](#3-major-financial-ai-company-news) | Major Financial AI Company News | Meta $12B Nebius deal; robotics mega-rounds totaling $1.2B; Atlassian cuts 1,600 for AI pivot |
-| [4](#4-major-ai-data-center-news) | Major AI Data Center News | NTT doubling to 4 GW; $650B hyperscaler infrastructure commitment; Cisco Secure AI Factory |
-| [5](#5-regulation--policy) | Regulation & Policy | White House 7-pillar AI legislative framework; copyright scraping position |
-| [6](#6-australia--ai-news) | Australia — AI News | Anthropic opens Sydney office; Atlassian AI restructure |
-| [7](#7-ai-workflows--tactics) | AI Workflows & Tactics | NSTR |
-| [8](#8-notable-voices) | Notable Voices | No confirmed activity from tracked accounts in last 24h |
-| [9](#9-podcast-highlights) | Podcast Highlights | AI Daily Brief ep. 927: NVIDIA inference inflection point |
+| 1 | [New LLMs / Lab Tools](#1-new-llm-versions--major-ai-lab-tools) | MiniMax M2.7 "self-evolving" model released; Apple Siri revamp delayed again |
+| 2 | [FOSS / Open-Weight LMs & Tools](#2-foss--open-weight-lms--tools) | NVIDIA OpenClaw agentic framework launched at GTC |
+| 3 | [Major Financial AI Company News](#3-major-financial-ai-company-news) | Meta $12B Nebius deal; robotics mega-rounds totaling $1.2B; Atlassian cuts 1,600 for AI pivot |
+| 4 | [Major AI Data Center News](#4-major-ai-data-center-news) | NTT doubling to 4 GW; $650B hyperscaler infrastructure commitment; Cisco Secure AI Factory |
+| 5 | [Regulation & Policy](#5-regulation--policy) | White House 7-pillar AI legislative framework; copyright scraping position |
+| 6 | [Australia — AI News](#6-australia--ai-news) | Anthropic opens Sydney office; Atlassian AI restructure |
+| 7 | [AI Workflows & Tactics](#7-ai-workflows--tactics) | NSTR |
+| 8 | [Notable Voices](#8-notable-voices) | No confirmed activity from tracked accounts in last 24h |
+| 9 | [Podcast Highlights](#9-podcast-highlights) | AI Daily Brief ep. 927: NVIDIA inference inflection point |
 
 ---
 

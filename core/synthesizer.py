@@ -199,7 +199,9 @@ CRITICAL INSTRUCTIONS:
 - This is NOT an update or diff — produce the entire document from scratch
 - Start with a markdown heading: "# AI Daily Brief — YYYY-MM-DD"
 - Do NOT include any classification statement (e.g. "Classification: OPEN SOURCE" or "Period:" lines) — omit these entirely
-- Immediately after the heading, include the Summary Table. Each row must have a NUMBERED category name (e.g. "1. New LLMs / Lab Tools") as a clickable anchor link to its section below
+- Immediately after the heading, include the Summary Table with three columns: #, Category, Signal
+- The table must use this exact format for each row: | 1 | [Category Name](#anchor) | signal text |
+- The number column is plain text (NOT a link). The category name column is the clickable anchor link. Example row: | 1 | [New LLMs / Lab Tools](#1-new-llm-versions--major-ai-lab-tools) | Signal text here |
 - Then include ALL 9 categories in order, each with its own NUMBERED ## heading (e.g. "## 1. New LLM Versions / Major AI Lab Tools")
 - End with: *Prepared: YYYY-MM-DD* and *Next brief: YYYY-MM-DD*
 - Use ALL the source material above — do not search the web again

@@ -6,19 +6,17 @@
 
 # AI Daily Brief — 2026-03-21
 
-## Summary Table
-
-| Category | Signal |
-|---|---|
-| [**1. New LLMs / Lab Tools**](#1-new-llm-versions--major-ai-lab-tools) | OpenAI pivots to autonomous AI researcher; acquires Astral (ruff/uv); publishes agent misalignment monitoring. Apple/Gemini Siri imminent. |
-| [**2. FOSS / Open-Weight**](#2-foss--open-weight-lms--tools) | Helios 14B: real-time open-source video gen on single GPU. Red Hat BYOA + OpenClaw at KubeCon. |
-| [**3. Financial Moves**](#3-major-financial-ai-company-news) | Supermicro co-founder charged ($2.5B chip smuggling). Uber-Rivian $1.25B robotaxi deal. Britannica sues OpenAI (novel Lanham Act angle). |
-| [**4. Data Centers**](#4-major-ai-data-center-news) | NTT doubling to 4GW; 70% pre-leased. ~$13M/MW benchmark. |
-| [**5. Regulation & Policy**](#5-regulation--policy) | White House AI framework seeks federal preemption of state AI laws. |
-| [**6. Australia**](#6-australia--ai-news) | Anthropic Sydney office open; AU ranks #4 globally in per-capita Claude usage. |
-| [**7. Workflows & Tactics**](#7-ai-workflows--tactics) | NSTR |
-| [**8. Notable Voices**](#8-notable-voices) | NSTR |
-| [**9. Podcasts**](#9-podcast-highlights) | Anthropic study: 81K users reveal coexisting AI hopes (productivity) and fears (cognitive atrophy). |
+| # | Category | Signal |
+|---|----------|--------|
+| 1 | [New LLMs / Lab Tools](#1-new-llm-versions--major-ai-lab-tools) | OpenAI pivots to autonomous AI researcher; acquires Astral (ruff/uv); publishes agent misalignment monitoring. Apple/Gemini Siri imminent. |
+| 2 | [FOSS / Open-Weight](#2-foss--open-weight-lms--tools) | Helios 14B: real-time open-source video gen on single GPU. Red Hat BYOA + OpenClaw at KubeCon. |
+| 3 | [Financial Moves](#3-major-financial-ai-company-news) | Supermicro co-founder charged ($2.5B chip smuggling). Uber-Rivian $1.25B robotaxi deal. Britannica sues OpenAI (novel Lanham Act angle). |
+| 4 | [Data Centers](#4-major-ai-data-center-news) | NTT doubling to 4GW; 70% pre-leased. ~$13M/MW benchmark. |
+| 5 | [Regulation & Policy](#5-regulation--policy) | White House AI framework seeks federal preemption of state AI laws. |
+| 6 | [Australia](#6-australia--ai-news) | Anthropic Sydney office open; AU ranks #4 globally in per-capita Claude usage. |
+| 7 | [Workflows & Tactics](#7-ai-workflows--tactics) | NSTR |
+| 8 | [Notable Voices](#8-notable-voices) | NSTR |
+| 9 | [Podcasts](#9-podcast-highlights) | Anthropic study: 81K users reveal coexisting AI hopes (productivity) and fears (cognitive atrophy). |
 
 ---
 
