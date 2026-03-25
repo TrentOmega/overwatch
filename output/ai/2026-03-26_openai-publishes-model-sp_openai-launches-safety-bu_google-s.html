@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artificial Intelligence Brief — 2026-03-26</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', serif;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            color: #e0e0e0;
+            background: #1a1a1a;
+            line-height: 1.7;
+        }
+        header {
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+        }
+        header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #f0f0f0;
+        }
+        header .meta {
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 0.3rem;
+        }
+        .content {
+            font-size: 1rem;
+        }
+        .content h1, .content h2, .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.6rem;
+            color: #f0f0f0;
+        }
+        .content h1 { font-size: 1.4rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+        .content p { margin-bottom: 1rem; }
+        .content ul, .content ol {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+        .content li { margin-bottom: 0.4rem; }
+        .content a { color: #5cb8d6; }
+        .content a:hover { color: #7ecde8; }
+        .content blockquote {
+            border-left: 3px solid #555;
+            padding-left: 1rem;
+            margin: 1rem 0;
+            color: #aaa;
+        }
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        .content th, .content td {
+            border: 1px solid #333;
+            padding: 0.5rem 0.75rem;
+            text-align: left;
+        }
+        .content th {
+            background: #2a2a2a;
+            font-weight: 700;
+            color: #f0f0f0;
+        }
+        .content tr:nth-child(even) {
+            background: #222;
+        }
+        .content hr {
+            border: none;
+            border-top: 1px solid #333;
+            margin: 2rem 0;
+        }
+        footer {
+            border-top: 1px solid #333;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            font-size: 0.8rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Artificial Intelligence Brief</h1>
+        <div class="meta">2026-03-26 · 15 items collected · Overwatch</div>
+    </header>
+    <div class="content">
+        <h1 id="ai-daily-brief-2026-03-26">AI Daily Brief — 2026-03-26</h1>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Category</th>
+<th>Signal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><a href="#1-new-llm-versions--major-ai-lab-tools">New LLMs / Lab Tools</a></td>
+<td>OpenAI publishes Model Spec framework, launches Safety Bug Bounty; Google ships Lyria 3 music generation; OpenAI kills Sora</td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#2-foss--open-weight-lms--tools">FOSS / Open-Weight LMs &amp; Tools</a></td>
+<td>OpenAI open-sources teen safety tools; Cursor ships Composer 2 built on Moonshot AI's Kimi 2.5</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#3-major-financial-ai-company-news">Major Financial AI Company News</a></td>
+<td>Arm unveils first in-house AI chip, stock +20%, Meta as launch customer; Disney $1B Sora deal collapses; OpenAI-Helion fusion power talks</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#4-major-ai-data-center-news">Major AI Data Center News</a></td>
+<td>OpenAI targeting 50GW fusion power by 2035 via Helion; Australia needs A$52B and 3.1GW compute by 2030</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#5-regulation--policy">Regulation &amp; Policy</a></td>
+<td>OpenAI Model Spec codifies behavioral guardrails; Safety Bug Bounty formalizes adversarial testing pipeline</td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#6-australia--ai-news">Australia — AI News</a></td>
+<td>Deloitte warns of "sliding doors" moment — A$52B infrastructure gap, 2-year window to act</td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#7-ai-workflows--tactics">AI Workflows &amp; Tactics</a></td>
+<td>Claude Code remote control enables mobile-first agentic development; Google Antigravity ships prompt-to-production full-stack apps</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#8-notable-voices">Notable Voices</a></td>
+<td>No confirmed high-signal posts from tracked accounts in the last 24h</td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#9-podcast-highlights">Podcast Highlights</a></td>
+<td>AI Daily Brief retrospective on Claude Code feature blitz — remote control, Claudification trend, and the OpenClaw competitive dynamic</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="1-new-llm-versions-major-ai-lab-tools">1. New LLM Versions / Major AI Lab Tools</h2>
+<p><strong>OpenAI publishes Model Spec behavioral framework</strong>
+- 2026-03-25
+- <a href="https://openai.com/index/our-approach-to-the-model-spec">OpenAI Blog</a>
+- OpenAI released a detailed public breakdown of its Model Spec — the internal document governing how its models should behave. The post explains how the spec balances safety constraints, user autonomy, and developer customization as models become more agentic.
+- <strong>Why it matters:</strong> The Model Spec is the closest thing to a constitution for GPT behavior. Making the reasoning behind it public sets a precedent for transparency in model governance and gives competitors and regulators a concrete artifact to evaluate.</p>
+<p><strong>OpenAI launches Safety Bug Bounty program</strong>
+- 2026-03-25
+- <a href="https://openai.com/index/safety-bug-bounty">OpenAI Blog</a>
+- New bounty program specifically targeting AI safety risks: agentic vulnerabilities, prompt injection, data exfiltration, and abuse patterns. This extends beyond OpenAI's existing security bug bounty into adversarial AI behavior.
+- <strong>Why it matters:</strong> Formalizes crowdsourced red-teaming for agentic attack surfaces. Signals OpenAI expects prompt injection and data exfil to remain persistent threats as tool-using agents proliferate.</p>
+<p><strong>Google ships Lyria 3 and Lyria 3 Pro music generation</strong>
+- 2026-03-25
+- <a href="https://blog.google/innovation-and-ai/technology/developers-tools/lyria-3-developers/">Lyria 3 for developers</a> | <a href="https://blog.google/innovation-and-ai/technology/ai/lyria-3-pro/">Lyria 3 Pro</a>
+- Google released Lyria 3 as a developer-facing music generation model and Lyria 3 Pro for longer-form tracks across Google products.
+- <strong>Why it matters:</strong> Google is staking a claim in generative audio. Developer API access means third-party music tools will follow quickly.</p>
+<p><strong>OpenAI shuts down Sora; Disney $1B deal collapses</strong>
+- 2026-03-25
+- <a href="https://www.npr.org/2026/03/25/g-s1-115055/openai-pulls-the-plug-on-sora-the-viral-ai-video-app-that-sparked-deepfake-concerns">NPR</a>
+- OpenAI killed Sora (app + API) six months after launch. The $1B Disney character-licensing deal is dead. Employees cited massive GPU consumption during intensified competition with Anthropic and Google as the driver.
+- <strong>Why it matters:</strong> A major strategic retreat. OpenAI is triaging GPU allocation toward core LLM competition over speculative media products. The Disney collapse signals enterprise confidence in AI video generation remains fragile.</p>
+<p><strong>GPT-5.4 Pro solves open math conjecture on FrontierMath</strong>
+- 2026-03-24
+- <a href="https://winbuzzer.com/2026/03/24/gpt-54-pro-solves-open-math-problem-epoch-ai-frontiermath-xcxwbn/">WinBuzzer</a>
+- GPT-5.4 Pro solved a Ramsey-style hypergraph problem open since 2019 — the first AI to clear FrontierMath's open-problem track. Overall FrontierMath scores have risen from 5% (GPT-4, 2024) to 50% across frontier models.
+- <strong>Why it matters:</strong> FrontierMath was designed to be unsolvable by AI for years. The 5% → 50% jump in ~18 months is one of the starkest capability acceleration metrics available.</p>
+<hr />
+<h2 id="2-foss-open-weight-lms-tools">2. FOSS / Open-Weight LMs &amp; Tools</h2>
+<p><strong>OpenAI open-sources teen safety tools</strong>
+- 2026-03-24
+- <a href="https://techcrunch.com/2026/03/24/openai-adds-open-source-tools-to-help-developers-build-for-teen-safety/">TechCrunch</a>
+- OpenAI released open-source safety prompts and the gpt-oss-safeguard model for developers building age-appropriate AI apps (ages 13-17). Covers graphic violence, harmful body ideals, dangerous challenges, and age-restricted content.
+- <strong>Why it matters:</strong> Lowers the bar for smaller developers to ship age-appropriate AI products. Pre-empts regulatory pressure by making safety tooling freely available.</p>
+<p><strong>Cursor ships Composer 2, built on Moonshot AI's Kimi 2.5</strong>
+- 2026-03-22
+- <a href="https://techcrunch.com/2026/03/22/cursor-admits-its-new-coding-model-was-built-on-top-of-moonshot-ais-kimi/">TechCrunch</a>
+- Cursor released Composer 2 (61.3 CursorBench, up from 38.0 v1) at $0.50/M input tokens. Controversy: the model is fine-tuned on Moonshot AI's open-source Kimi 2.5, initially without attribution.
+- <strong>Why it matters:</strong> Shows the agentic coding market will be built on open-weight base models. The attribution controversy is a bellwether for norms around open-source model provenance in commercial products.</p>
+<hr />
+<h2 id="3-major-financial-ai-company-news">3. Major Financial AI Company News</h2>
+<p><strong>Arm unveils first in-house AI chip; stock surges 20%</strong>
+- 2026-03-25
+- <a href="https://www.cnbc.com/2026/03/25/arm-stock-chip-revenue-agi-cpu.html">CNBC</a>
+- Arm revealed the AGI CPU — a 136-core AI inference processor for data centers. Meta is the launch customer. CEO projects $15B revenue from the chip by 2031. Citi called it the most significant shift in Arm's history.
+- <strong>Why it matters:</strong> Arm moving from licensing IP to selling silicon directly restructures the AI chip market. A credible alternative to Nvidia custom silicon, backed by Meta's scale, changes the inference cost curve.</p>
+<p><strong>OpenAI-Sora shutdown kills Disney partnership</strong>
+- 2026-03-25
+- <a href="https://www.npr.org/2026/03/25/g-s1-115055/openai-pulls-the-plug-on-sora-the-viral-ai-video-app-that-sparked-deepfake-concerns">NPR</a>
+- The $1B Disney deal — which included character licensing for Sora-generated content — collapsed with Sora's shutdown. OpenAI is reallocating GPU resources to core model training.
+- <strong>Why it matters:</strong> Largest known failed AI partnership deal. Signals that even the biggest names can't sustain GPU-hungry side projects during the frontier model arms race.</p>
+<p><strong>OpenAI in talks for Helion fusion power</strong>
+- 2026-03-23
+- <a href="https://techcrunch.com/2026/03/23/sam-altman-openai-fusion-energy-board-helion/">TechCrunch</a>
+- OpenAI is in advanced negotiations to purchase fusion electricity from Helion Energy — targeting 5GW by 2030, 50GW by 2035. Altman stepped down as Helion board chair to manage the conflict of interest.
+- <strong>Why it matters:</strong> 50GW is roughly the current electricity consumption of a mid-sized country. If the deal closes, it would be the largest single power purchase agreement in history and directly ties AI scaling to energy breakthrough timelines.</p>
+<hr />
+<h2 id="4-major-ai-data-center-news">4. Major AI Data Center News</h2>
+<p><strong>OpenAI-Helion fusion power deal: 50GW by 2035</strong>
+- 2026-03-23
+- <a href="https://techcrunch.com/2026/03/23/sam-altman-openai-fusion-energy-board-helion/">TechCrunch</a>
+- See financial section above. The 5GW/2030 and 50GW/2035 targets would require massive new data center infrastructure purpose-built around fusion supply.
+- <strong>Why it matters:</strong> If fusion timelines slip, OpenAI's scaling plans face an energy bottleneck. If they hold, it reshapes the geography and economics of AI compute.</p>
+<p><strong>Australia needs A$52B digital infrastructure investment by 2030</strong>
+- 2026-03-25
+- <a href="https://www.bloomberg.com/news/articles/2026-03-25/australia-faces-sliding-doors-moment-on-ai-push-deloitte-says">Bloomberg</a>
+- Deloitte estimates Australia needs 3.1GW of additional compute capacity, requiring A$52B in investment over 4 years.
+- <strong>Why it matters:</strong> Quantifies the infrastructure gap for a mid-tier economy trying to stay competitive in AI. The 3.1GW figure contextualizes how far behind non-US markets are.</p>
+<hr />
+<h2 id="5-regulation-policy">5. Regulation &amp; Policy</h2>
+<p><strong>OpenAI Model Spec made public</strong>
+- 2026-03-25
+- <a href="https://openai.com/index/our-approach-to-the-model-spec">OpenAI Blog</a>
+- The Model Spec functions as a governance document for GPT model behavior, addressing safety boundaries, user freedom, and accountability. Publishing the reasoning behind it invites external scrutiny.
+- <strong>Why it matters:</strong> Gives regulators, auditors, and competitors a concrete behavioral specification to evaluate. Could become a de facto template that other labs are measured against.</p>
+<p><strong>OpenAI Safety Bug Bounty formalizes adversarial testing</strong>
+- 2026-03-25
+- <a href="https://openai.com/index/safety-bug-bounty">OpenAI Blog</a>
+- Extends traditional bug bounties into AI-specific attack surfaces: prompt injection, agentic exploitation, data exfiltration.
+- <strong>Why it matters:</strong> Creates a market-based mechanism for discovering AI safety failures before deployment. May influence regulatory expectations around adversarial testing requirements.</p>
+<hr />
+<h2 id="6-australia-ai-news">6. Australia — AI News</h2>
+<p><strong>Deloitte: Australia faces "sliding doors" moment on AI</strong>
+- 2026-03-25
+- <a href="https://www.bloomberg.com/news/articles/2026-03-25/australia-faces-sliding-doors-moment-on-ai-push-deloitte-says">Bloomberg</a>
+- Deloitte Access Economics warns Australia has a two-year window to capture AI infrastructure opportunities. Requires A$52B in digital infrastructure investment by 2030 and an additional 3.1GW of compute capacity. Potential upside: A$134B added to the economy by 2050.
+- <strong>Why it matters:</strong> Puts hard numbers on Australia's AI infrastructure deficit. The two-year window framing suggests policy decisions made in 2026-2027 will determine whether Australia is a participant or a consumer in the AI economy.</p>
+<hr />
+<h2 id="7-ai-workflows-tactics">7. AI Workflows &amp; Tactics</h2>
+<p><strong>Claude Code Remote Control — mobile-first agentic development</strong>
+- Available now
+- Tools: Claude Code (terminal), mobile browser or Claude mobile app
+- Setup:
+  1. Navigate to your project directory in terminal
+  2. Run <code>claude remote-control</code> to start a dedicated server, or use <code>/remote-control</code> (or <code>/rc</code>) within an existing session
+  3. Scan the QR code or open the displayed URL on your phone
+  4. Issue commands, review diffs, and approve changes from your mobile device
+  5. Claude continues running locally with full access to your file system, MCP servers, and tools
+- The session runs on your machine — no cloud compute. You can switch between terminal and mobile interchangeably in interactive mode.
+- <strong>Why it matters:</strong> Eliminates the laptop dependency for agentic coding. Enables reviewing and directing AI work during commutes, walks, or away from desk. Multiple practitioners report shipping features and bug fixes entirely from mobile.</p>
+<p><strong>Google Antigravity — prompt-to-production full-stack apps</strong>
+- Available now in Google AI Studio
+- Tools: Google AI Studio, Firebase (Firestore, Auth), Next.js/React/Angular
+- <a href="https://blog.google/innovation-and-ai/technology/developers-tools/full-stack-vibe-coding-google-ai-studio/">Google Blog</a>
+- Setup:
+  1. Open Google AI Studio
+  2. Describe your app in natural language
+  3. Antigravity generates a full-stack app with Firebase backend auto-provisioned
+  4. Includes database (Firestore), authentication, external libraries, and a new Secrets Manager
+  5. Deploy directly from the studio
+- <strong>Why it matters:</strong> Closes the gap between "vibe coding" prototypes and production apps by auto-provisioning backend infrastructure. Removes the Firebase setup friction that typically kills prototypes.</p>
+<hr />
+<h2 id="8-notable-voices">8. Notable Voices</h2>
+<p>The social media source items for Karpathy, Steinberg, pablof7z, Dylan Patel, Nathan Lambert, Jakub Pachocki, and Sebastian Raschka contained research directives rather than confirmed post content. No verified high-signal posts from tracked accounts in the last 24 hours.</p>
+<p>NSTR (unverified)</p>
+<hr />
+<h2 id="9-podcast-highlights">9. Podcast Highlights</h2>
+<p><strong>AI Daily Brief — "How to Use Claude's Massive New Upgrades"</strong> (2026-03-24)
+- <a href="https://www.youtube.com/watch?v=wZB5fpm8oUA">YouTube</a></p>
+<p><strong>Topic 1: Claude Code Remote Control</strong>
+- <strong>What:</strong> A feature allowing you to control Claude Code from your phone while it runs locally on your machine. Three modes: dedicated server (<code>claude remote-control</code>), interactive (switch between terminal and mobile), and mid-session (<code>/rc</code>).
+- <strong>Available now:</strong> Yes
+- <strong>How to use:</strong> Start a Claude Code session → run <code>claude remote-control</code> or <code>/rc</code> → scan QR code or open URL on phone → full bidirectional control with access to local file system, MCP servers, and tools.
+- <strong>Why it matters:</strong> Practitioners report shipping entire features from mobile. Peter Levels compared it favorably to SSH. Removes the requirement to be at your laptop to direct agentic coding work.
+- <strong>References:</strong> <a href="https://docs.anthropic.com/en/docs/claude-code">Claude Code docs</a></p>
+<p><strong>Topic 2: The "Claudification" / OpenClaw competitive dynamic</strong>
+- <strong>What:</strong> The podcast frames Claude Code's feature sprint as a direct response to OpenClaw's rise. The three-step progression: (1) frontier models (Opus 4.5/4.6 era), (2) OpenClaw unlocking agent harness patterns, (3) every AI product racing to absorb those patterns.
+- <strong>Why it matters:</strong> OpenClaw's creator Peter Steinberger was hired by OpenAI, but Anthropic's response has been a rapid feature blitz rather than a talent acquisition. The podcast argues the "let them cook" camp is vindicated — Anthropic shipped its own versions of OpenClaw's most popular features (remote control, mobile bridging, multi-device workflows) natively into Claude Code.
+- <strong>References:</strong> <a href="https://github.com/nicepkg/openclaw">OpenClaw GitHub</a> | <a href="https://docs.anthropic.com/en/docs/claude-code/changelog">Claude Code changelog</a></p>
+<hr />
+<p><strong>LiteLLM supply-chain compromise — operational note:</strong> LiteLLM versions 1.82.7 and 1.82.8 on PyPI were compromised with credential-stealing malware (<a href="https://cybernews.com/security/critical-litellm-supply-chain-attack-sends-shockwaves/">Cybernews</a>). If you use LiteLLM, audit your installed version immediately and rotate any exposed SSH keys or cloud credentials. The package has ~97M monthly downloads.</p>
+<hr />
+<p><em>Prepared: 2026-03-26</em>
+<em>Next brief: 2026-03-27</em></p>
+    </div>
+    <footer>
+        Generated by Overwatch
+    </footer>
+</body>
+</html>
