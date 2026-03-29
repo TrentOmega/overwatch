@@ -1,34 +1,34 @@
 import json
-import os
-import subprocess
 from datetime import datetime, timezone, timedelta
+
+from core.ai import run_prompt
 
 _AEST = timezone(timedelta(hours=10))
 
 
-def synthesize(items, topic_config, model=None):
+def synthesize(items, topic_config, ai_settings):
     """Two-phase synthesis: research gaps, then produce the brief."""
-    model = model or os.getenv("OVERWATCH_MODEL")
+    provider = ai_settings["provider"]
 
-    # Phase 1: Claude researches the web to fill gaps
-    print("  Phase 1: Web research for gaps...")
-    research = _research_phase(items or [], topic_config, model)
+    # Phase 1: use the configured AI to research the web for gaps
+    print(f"  Phase 1: Web research for gaps via {provider}...")
+    research = _research_phase(items or [], topic_config, ai_settings)
     print(f"  Found {len(research)} additional items via research")
 
-    # Phase 2: Claude synthesizes everything into the final brief
-    print("  Phase 2: Synthesizing brief...")
-    return _synthesis_phase(items or [], research, topic_config, model)
+    # Phase 2: synthesize everything into the final brief
+    print(f"  Phase 2: Synthesizing brief via {provider}...")
+    return _synthesis_phase(items or [], research, topic_config, ai_settings)
 
 
-def _research_phase(items, topic_config, model):
-    """Have Claude search the web for news the structured sources may have missed."""
+def _research_phase(items, topic_config, ai_settings):
+    """Have the configured AI search the web for news the structured sources may have missed."""
     today = datetime.now(_AEST).strftime("%Y-%m-%d")
     synthesis_config = topic_config.get("synthesis", {})
 
     categories = synthesis_config.get("categories", [])
     cat_list = "\n".join(f"- {c['name']}: {c.get('scope', '')}" for c in categories)
 
-    # Summarise what we already have so Claude knows the gaps
+    # Summarise what we already have so the AI knows the gaps
     existing_summary = "No items collected from structured sources." if not items else (
         f"{len(items)} items already collected:\n" +
         "\n".join(f"- {item['title']}" for item in items[:30])
@@ -58,12 +58,12 @@ Output your findings as a JSON array of objects with keys: title, url, date, sum
 If you find nothing new, output an empty array: []
 Output ONLY the JSON array, no other text."""
 
-    result = _run_claude(prompt, model)
+    result = run_prompt(prompt, ai_settings)
 
     try:
         return json.loads(result)
     except (json.JSONDecodeError, TypeError):
-        # If Claude returned prose instead of JSON, try to extract the array
+        # If the provider returned prose instead of JSON, try to extract the array
         start = result.find("[")
         end = result.rfind("]") + 1
         if start >= 0 and end > start:
@@ -74,7 +74,7 @@ Output ONLY the JSON array, no other text."""
         return []
 
 
-def _synthesis_phase(items, research_items, topic_config, model):
+def _synthesis_phase(items, research_items, topic_config, ai_settings):
     """Combine collected items + research into the final brief."""
     if not items and not research_items:
         return _empty_brief(topic_config)
@@ -85,26 +85,7 @@ def _synthesis_phase(items, research_items, topic_config, model):
     user_prompt = _build_prompt(items, research_items, topic_config, synthesis_config)
     full_prompt = f"{system_prompt}\n\n{user_prompt}"
 
-    return _run_claude(full_prompt, model)
-
-
-def _run_claude(prompt, model=None):
-    """Run a prompt through the Claude CLI via stdin to avoid arg length limits."""
-    import tempfile
-
-    cmd = ["claude", "-p", "-"]
-    if model:
-        cmd.extend(["--model", model])
-
-    # Strip CLAUDECODE env var to avoid conflicts with parent Claude session.
-    # Run from /tmp so the subprocess doesn't pick up project-level .claude config.
-    env = {k: v for k, v in os.environ.items() if k != "CLAUDECODE"}
-    result = subprocess.run(cmd, input=prompt, capture_output=True, text=True, timeout=600, env=env, cwd="/tmp")
-
-    if result.returncode != 0:
-        raise RuntimeError(f"Claude CLI failed: {result.stderr[:500]}")
-
-    return result.stdout.strip()
+    return run_prompt(full_prompt, ai_settings)
 
 
 def _build_prompt(items, research_items, topic_config, synthesis_config):
@@ -149,9 +130,9 @@ def _build_prompt(items, research_items, topic_config, synthesis_config):
         parts.append(_format_items(social_items))
         parts.append("")
 
-    # Section 2: Research findings from Claude's web search
+    # Section 2: Research findings from the research phase
     if research_items:
-        parts.append("## Source Material: Web Research (found via search)")
+        parts.append("## Source Material: Web Research (found during research phase)")
         for i, item in enumerate(research_items, 1):
             lines = [f"[R{i}] {item.get('title', 'Untitled')}"]
             if item.get("url"):
@@ -200,8 +181,15 @@ CRITICAL INSTRUCTIONS:
 - Start with a markdown heading: "# AI Daily Brief — YYYY-MM-DD"
 - Do NOT include any classification statement (e.g. "Classification: OPEN SOURCE" or "Period:" lines) — omit these entirely
 - Immediately after the heading, include the Summary Table with three columns: #, Category, Signal
+- The Summary Table must begin with these exact two lines:
+  | # | Category | Signal |
+  |---|---|---|
+- If a category has no meaningful update, write the signal as EXACTLY `NSTR` and make the section body EXACTLY `NSTR`
+- Do NOT paraphrase absence with phrases like "No major release confirmed", "No specific posts provided", or similar
 - The table must use this exact format for each row: | 1 | [Category Name](#anchor) | signal text |
 - The number column is plain text (NOT a link). The category name column is the clickable anchor link. Example row: | 1 | [New LLMs / Lab Tools](#1-new-llm-versions--major-ai-lab-tools) | Signal text here |
+- Do NOT repeat the same underlying story in multiple categories. Choose the single best-fit category and mark the others NSTR if they have no distinct item
+- Do NOT populate "Notable Voices" from podcast material. That section is only for actual tracked-person/social-source updates
 - Then include ALL 9 categories in order, each with its own NUMBERED ## heading (e.g. "## 1. New LLM Versions / Major AI Lab Tools")
 - End with: *Prepared: YYYY-MM-DD* and *Next brief: YYYY-MM-DD*
 - Use ALL the source material above — do not search the web again

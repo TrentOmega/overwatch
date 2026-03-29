@@ -7,6 +7,7 @@
 # AI Daily Brief — 2026-03-29
 
 | # | Category | Signal |
+|---|---|---|
 | 1 | [New LLM Versions / Major AI Lab Tools](#1-new-llm-versions--major-ai-lab-tools) | Anthropic confirmed Mythos testing after a leak; Google pushed a stronger native-audio stack into live voice products. |
 | 2 | [FOSS / Open-Weight LMs & Tools](#2-foss--open-weight-lms--tools) | NSTR |
 | 3 | [Major Financial AI Company News](#3-major-financial-ai-company-news) | NSTR |

@@ -8,14 +8,14 @@
 
 | # | Category | Signal |
 |---|---|---|
-| 1 | [New LLM Versions / Major AI Lab Tools](#1-new-llm-versions--major-ai-lab-tools) | No major lab release confirmed in supplied material |
-| 2 | [FOSS / Open-Weight LMs & Tools](#2-foss--open-weight-lms--tools) | No meaningful open-weight release confirmed |
+| 1 | [New LLM Versions / Major AI Lab Tools](#1-new-llm-versions--major-ai-lab-tools) | NSTR |
+| 2 | [FOSS / Open-Weight LMs & Tools](#2-foss--open-weight-lms--tools) | NSTR |
 | 3 | [Major Financial AI Company News](#3-major-financial-ai-company-news) | China Moonshot AI exploring Hong Kong listing and new raise |
 | 4 | [Major AI Data Center News](#4-major-ai-data-center-news) | Meta funding power build-out for Louisiana AI campus |
-| 5 | [Regulation & Policy](#5-regulation--policy) | No material policy action confirmed in supplied material |
+| 5 | [Regulation & Policy](#5-regulation--policy) | NSTR |
 | 6 | [Australia — AI News](#6-australia--ai-news) | NSTR |
 | 7 | [AI Workflows & Tactics](#7-ai-workflows--tactics) | Vertical-model playbook: proprietary interaction data plus post-training |
-| 8 | [Notable Voices](#8-notable-voices) | No specific high-signal posts provided |
+| 8 | [Notable Voices](#8-notable-voices) | NSTR |
 | 9 | [Podcast Highlights](#9-podcast-highlights) | AI Daily Brief focused on shift toward vertical AI models |
 
 ## 1. New LLM Versions / Major AI Lab Tools
