@@ -190,6 +190,7 @@ CRITICAL INSTRUCTIONS:
 - The number column is plain text (NOT a link). The category name column is the clickable anchor link. Example row: | 1 | [New LLMs / Lab Tools](#1-new-llm-versions--major-ai-lab-tools) | Signal text here |
 - Do NOT repeat the same underlying story in multiple categories. Choose the single best-fit category and mark the others NSTR if they have no distinct item
 - Do NOT populate "Notable Voices" from podcast material. That section is only for actual tracked-person/social-source updates
+- Do NOT place the same podcast/source URL in both "AI Workflows & Tactics" and "Podcast Highlights". If a podcast yields one actionable workflow item, put it in the best-fit section and make the other section `NSTR` unless there is a distinct second item
 - Then include ALL 9 categories in order, each with its own NUMBERED ## heading (e.g. "## 1. New LLM Versions / Major AI Lab Tools")
 - End with: *Prepared: YYYY-MM-DD* and *Next brief: YYYY-MM-DD*
 - Use ALL the source material above — do not search the web again
