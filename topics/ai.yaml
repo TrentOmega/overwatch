@@ -16,6 +16,12 @@ sources:
     name: AI News (MIT Tech Review)
     url: https://www.technologyreview.com/topic/artificial-intelligence/feed
 
+  - type: web_search
+    name: Axiom Math
+    queries:
+      - "Axiom Math"
+      - "Carina Hong Axiom Math"
+
   # --- AI Daily Brief podcast ---
   - type: youtube_channel
     name: AI Daily Brief
@@ -54,6 +60,15 @@ sources:
     handle: steipete
     urls:
       - https://x.com/steipete
+
+  - type: social
+    name: Carina Hong (Axiom Math)
+    platform: x
+    handle: CarinaLHong
+    urls:
+      - https://x.com/CarinaLHong
+      - https://axiommath.ai
+      - https://x.com/axiommathai
 
   - type: social
     name: Pablo (pablof7z)
@@ -111,10 +126,10 @@ synthesis:
 
   categories:
     - name: "New LLM versions / major AI lab tools"
-      scope: "New LLM version releases or new tools from Google, Anthropic, xAI, Meta, OpenAI, and other major competitors"
+      scope: "New LLM version releases or new tools from Google, Anthropic, xAI, Meta, OpenAI, Z.ai/Zhipu, DeepSeek, Moonshot/Kimi, MiniMax, Qwen/Alibaba, Baidu, Tencent, and other major competitors"
 
     - name: "FOSS / open-weight LMs & tools"
-      scope: "Major FOSS/open-weight LM updates (e.g. OpenClaw, DeepSeek, Llama)"
+      scope: "Major FOSS/open-weight LM updates (e.g. GLM, DeepSeek, OpenClaw, Llama)"
 
     - name: "Major financial AI company news"
       scope: "Significant financial moves, funding, acquisitions, IPOs in AI"
@@ -132,7 +147,7 @@ synthesis:
       scope: "Top tactical and actionable AI workflows extracted from YouTube videos with high view counts. For each workflow: what it does, what tools/models it uses, step-by-step how to set it up, and whether it's available now. Focus on practical, reproducible techniques the reader can implement today."
 
     - name: "Notable Voices"
-      scope: "Noteworthy posts and insights from Andrej Karpathy, Peter Steinberg (steipete), Pablo (pablof7z), Dylan Patel (SemiAnalysis), Nathan Lambert (Ai2/Interconnects), Jakub Pachocki (OpenAI Chief Scientist, @merettm), and Sebastian Raschka (Ai2/Ahead of AI)"
+      scope: "Noteworthy posts and insights from Andrej Karpathy, Peter Steinberg (steipete), Carina Hong (Axiom Math, @CarinaLHong), Pablo (pablof7z), Dylan Patel (SemiAnalysis), Nathan Lambert (Ai2/Interconnects), Jakub Pachocki (OpenAI Chief Scientist, @merettm), and Sebastian Raschka (Ai2/Ahead of AI)"
 
     - name: "Podcast Highlights"
       scope: "Key topics and summaries from the AI Daily Brief podcast. For each topic covered: what is it, is it available now, how do you use it (specific steps/links if possible), and why it matters. Go beyond headlines — give the reader enough to act on. For each topic, include direct links to the references, papers, tools, or announcements discussed. If the podcast does not cite specific references, search the web for the most reliable primary sources (official blogs, papers, docs) and include those links."
@@ -148,6 +163,7 @@ synthesis:
       - Short "Why it matters"
     - Keep each item concise
     - NEVER link to a site's homepage or generic page when a direct article URL is available. Every link must point to the specific content being referenced.
+    - For government and media links, make sure the URL resolves to the specific article and not a caretaker homepage, section landing page, or generic redirect target.
 
     Do NOT include any classification statement (e.g. "Classification: OPEN SOURCE" or "Period:" lines).
 
@@ -165,3 +181,77 @@ synthesis:
     - Open source developments
     - Practical AI workflows and automation
     - Australian AI ecosystem
+
+  trusted_lab_watchlist:
+    - name: "Z.ai / Zhipu"
+      focus: "GLM releases, model cards, technical reports, API/docs updates, and open-source drops"
+      urls:
+        - https://docs.z.ai/
+        - https://huggingface.co/zai-org
+        - https://x.com/Zai_org
+
+    - name: "DeepSeek"
+      focus: "model releases, API updates, and official benchmark/report posts"
+      urls:
+        - https://api-docs.deepseek.com/
+        - https://huggingface.co/deepseek-ai
+        - https://x.com/deepseek_ai
+
+    - name: "Moonshot AI / Kimi"
+      focus: "Kimi model releases, research posts, and product updates"
+      urls:
+        - https://moonshotai.github.io/
+        - https://www.kimi.com/
+        - https://x.com/MoonshotAI_EN
+
+    - name: "MiniMax"
+      focus: "foundation model and agent release announcements"
+      urls:
+        - https://www.minimax.io/
+        - https://x.com/MiniMax__AI
+
+    - name: "Qwen / Alibaba Cloud"
+      focus: "Qwen model releases, open-weight drops, and API/product updates"
+      urls:
+        - https://qwenlm.github.io/
+        - https://huggingface.co/Qwen
+        - https://www.alibabacloud.com/blog
+
+    - name: "Baidu / ERNIE"
+      focus: "ERNIE model updates and official platform releases"
+      urls:
+        - https://ernie.baidu.com/
+        - https://cloud.baidu.com/
+
+    - name: "Tencent Hunyuan"
+      focus: "Hunyuan model and platform announcements"
+      urls:
+        - https://hunyuan.tencent.com/
+        - https://cloud.tencent.com/
+
+  trusted_media_watchlist:
+    - name: "Reuters Technology / AI"
+      focus: "high-confidence reporting on model launches, policy, funding, and infrastructure"
+      urls:
+        - https://www.reuters.com/technology/
+        - https://www.reuters.com/technology/artificial-intelligence/
+
+    - name: "MIT Technology Review — AI"
+      focus: "high-signal AI reporting and major research/product coverage"
+      urls:
+        - https://www.technologyreview.com/topic/artificial-intelligence/
+
+    - name: "TechCrunch — AI"
+      focus: "startup, product, and platform launch coverage in AI"
+      urls:
+        - https://techcrunch.com/category/artificial-intelligence/
+
+    - name: "Bloomberg Technology"
+      focus: "major company, infrastructure, and market-moving AI coverage"
+      urls:
+        - https://www.bloomberg.com/technology
+
+    - name: "Semafor Technology"
+      focus: "executive, policy, and market reporting on AI and tech"
+      urls:
+        - https://www.semafor.com/technology

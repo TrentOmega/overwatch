@@ -37,7 +37,7 @@ NSTR
 
 ## 6. Australia AI News
 - 2026-04-09 — [Frontier models and their impact on cyber security](https://www.cyber.gov.au/about-us/view-all-content/news/frontier-models-and-their-impact-on-cyber-security): Australia's cyber agency warned frontier models will rapidly reshape the threat environment while also expanding defensive opportunities. Why it matters: Canberra is treating frontier-model cyber risk as an operational policy issue, not just a research concern.
-- 2026-04-10 — [TAFE SA launches free short course on AI to prepare workforce for the future](https://premier.sa.gov.au/media-releases/news-items/tafe-sa-launches-free-short-course-on-ai-to-prepare-workforce-for-the-future): South Australia launched a free AI micro-credential covering practical use, ethics, and workforce readiness. Why it matters: this is a concrete public-sector skills deployment, not a high-level pledge.
+- 2026-04-10 — [TAFE SA launches free short course on AI to prepare workforce for the future](https://statedevelopment.sa.gov.au/news/tafe-sa-launches-free-short-course-on-ai-to-prepare-workforce-for-the-future): South Australia launched a free AI micro-credential covering practical use, ethics, and workforce readiness. Why it matters: this is a concrete public-sector skills deployment, not a high-level pledge.
 
 ## 7. AI Workflows & Tactics
 NSTR
