@@ -8,6 +8,13 @@ sources:
     name: Source Name
     url: https://example.com/feed.xml
 
+  # --- Web search (search backend required: SearXNG, Brave, or Serper) ---
+  # - type: web_search
+  #   name: Search Label
+  #   queries:
+  #     - "company or topic name"
+  #     - "person + company"
+
   # --- YouTube channel (latest videos, optional transcript extraction) ---
   # - type: youtube_channel
   #   name: Channel Name
@@ -94,3 +101,16 @@ synthesis:
     - Area 1
     - Area 2
     - Area 3
+
+  trusted_lab_watchlist:
+    - name: "Official Lab or Source"
+      focus: "What to explicitly check here during the research phase"
+      urls:
+        - https://example.com/news
+        - https://huggingface.co/org-name
+
+  trusted_media_watchlist:
+    - name: "Trusted Media Outlet"
+      focus: "What category of reporting this outlet is good for"
+      urls:
+        - https://example.com/technology

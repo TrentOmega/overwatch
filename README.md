@@ -10,6 +10,8 @@ Collect (RSS, YouTube, Nostr, X/Twitter) → Research (configured AI) → Synthe
 
 Adding a new topic is just a YAML file in `topics/`.
 
+The system is AI-provider agnostic. Claude and Codex are built in, and any other stdin-driven CLI can be added as a provider in `config.yaml`.
+
 ## Setup
 
 ```bash
@@ -79,6 +81,29 @@ ai:
 
 To plug in another provider, add a new entry under `ai.providers` with a command that accepts the prompt on stdin.
 
+## Search backends
+
+`web_search` tries the configured backends in this order:
+1. `SEARXNG_URL`
+2. `BRAVE_SEARCH_API_KEY`
+3. `SERPER_API_KEY`
+
+This machine is currently set up to use a local SearXNG instance via `SEARXNG_URL=http://127.0.0.1:8888`.
+
+Why that was done:
+- one account-wide search endpoint for Overwatch and other projects
+- structured JSON search results instead of brittle scraping
+- broad-search discovery without hard-coding a commercial API dependency
+- a reusable local service for cron jobs and CLI workflows
+
+The local launcher scripts live outside the repo:
+- `~/.local/bin/searxng-local-start`
+- `~/.local/bin/searxng-local-stop`
+
+The user cron also includes:
+- `SEARXNG_URL=http://127.0.0.1:8888`
+- `@reboot /home/user/.local/bin/searxng-local-start >> /home/user/.local/share/searxng/searxng-cron.log 2>&1`
+
 ## Adding a topic
 
 Copy `topics/_template.yaml` and configure sources, categories, and synthesis rules:
@@ -94,10 +119,69 @@ python main.py --topic bitcoin
 | Type | Description |
 |---|---|
 | `rss` | RSS/Atom feeds |
+| `web_search` | Search-engine results collected via configured SearXNG, Brave, or Serper backend |
 | `youtube_channel` | Latest videos from a channel (with transcript extraction) |
 | `youtube_search` | Search YouTube by query, filter by views/recency |
 | `social` (x) | X/Twitter monitoring (via AI research fallback) |
 | `social` (nostr) | Nostr notes via direct relay WebSocket queries |
+
+## Prompt-injection and search hardening
+
+Broad web search is useful for discovery, but it is not safe enough to treat as authoritative input. The current defense model is intentionally layered:
+
+1. Search results are treated as untrusted input.
+2. Search snippets are sanitized before entering prompts.
+3. Trusted watchlist domains are surfaced explicitly.
+4. Major single-source broad-search claims are excluded before synthesis.
+5. The AI is instructed that source material is evidence, not instruction.
+
+This is implemented in `sources/web_search.py` and `core/synthesizer.py`.
+
+### What gets added to search items
+
+`web_search` items now include extra metadata:
+- `source_type="web_search"`
+- `search_query`
+- `domain`
+- `trust_level`
+- `verification_status`
+
+Research-phase items are normalized the same way before synthesis.
+
+### Evidence gate
+
+Before the synthesis prompt is built, Overwatch now applies a lightweight evidence gate:
+- trusted-watchlist domains are allowed through and labeled accordingly
+- corroborated same-story items across multiple domains are allowed through
+- major claims from a single unknown/broad-search source are excluded
+- minor single-source items can still pass through as low-confidence leads
+
+The design intent is not to make web search "safe". It is to make risky search output lower-impact and non-authoritative by default.
+
+### What counts as a major claim
+
+The current heuristic looks for language associated with:
+- model releases and launches
+- major company or funding moves
+- regulation and government action
+- data center / infrastructure developments
+
+That logic is intentionally lightweight and explainable. It is a sensible first filter, not a full claim-graph or trust engine.
+
+### Why this design
+
+The main tradeoff was to stay non-restrictive while still filtering obvious failure modes.
+
+The system does **not**:
+- block all broad-search items
+- require every item to come from a trusted watchlist
+- rely solely on the model to decide whether a source is trustworthy
+
+Instead it:
+- keeps broad search for discovery
+- uses trusted watchlists and direct-source preference for authority
+- moves the highest-risk exclusion decision into code
+- leaves lower-stakes judgment to synthesis
 
 ## Cron
 
@@ -132,3 +216,11 @@ yt-dlp --cookies-from-browser chrome --cookies cookies.txt --skip-download "http
 ```
 
 Then set `YOUTUBE_COOKIES_FILE=./cookies.txt` in `.env`.
+
+## Verification
+
+Current tests covering the hardening and provider work can be run with:
+
+```bash
+.venv/bin/python -m unittest discover -s tests
+```

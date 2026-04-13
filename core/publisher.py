@@ -6,6 +6,7 @@ import subprocess
 import yaml
 from jinja2 import Environment, FileSystemLoader
 
+from core.outline import generate_display_outline
 
 def _display_outline(html_path, max_items=3):
     """Extract a display-friendly outline from the brief's markdown content.
@@ -21,77 +22,7 @@ def _display_outline(html_path, max_items=3):
     with open(md_path) as f:
         content = f.read()
 
-    headlines = re.findall(r'\*\*(.+?)\*\*', content)
-    # Skip short, generic, meta, and summary-table category entries
-    headlines = [
-        h for h in headlines
-        if len(h) > 5
-        and not h.startswith("Why")
-        and not h.startswith("Classification")
-        and not h.startswith("Date")
-        and not h.startswith("Link")
-        and not h.startswith("Summary")
-        and not h.startswith("Key")
-        and not h.startswith("Top")
-        and not re.match(r'^\d+\.', h)  # skip numbered summary table entries
-    ]
-
-    selected = []
-    seen = set()
-    for h in headlines:
-        key = h.lower()
-        if key in seen:
-            continue
-        seen.add(key)
-        # Shorten long headlines at a natural break (colon, dash, comma)
-        short = _shorten_headline(h, max_len=40)
-        if short:
-            selected.append(short)
-        if len(selected) >= max_items:
-            break
-
-    if not selected:
-        return ""
-
-    # Build display string; reduce topic count if result is too long
-    for count in (len(selected), 2, 1):
-        result = "; ".join(selected[:count])
-        if len(result) <= 90:
-            return result
-
-    return selected[0][:90]
-
-
-_WEAK_ENDINGS = {'a', 'an', 'the', 'to', 'of', 'in', 'on', 'for', 'and', 'or', 'with', 'by', 'at', 'its'}
-
-
-def _trim_weak_ending(text):
-    """Strip trailing articles, prepositions, and conjunctions."""
-    words = text.rsplit(' ', 1)
-    if len(words) == 2 and words[1].lower() in _WEAK_ENDINGS:
-        return words[0]
-    return text
-
-
-def _shorten_headline(headline, max_len=40):
-    """Shorten a headline at a natural break point, preserving meaning."""
-    if len(headline) <= max_len:
-        return headline
-
-    # Try splitting at natural break points
-    for sep in (':', ' \u2014 ', ' \u2013 ', ' — ', ' | ', ' - ', ' (', ' \u201c', ' "'):
-        if sep in headline:
-            first_part = _trim_weak_ending(headline.split(sep)[0].strip())
-            if 10 < len(first_part) <= max_len:
-                return first_part
-
-    # Fall back to truncating at last meaningful word within limit
-    truncated = headline[:max_len]
-    last_space = truncated.rfind(' ')
-    if last_space > 15:
-        return _trim_weak_ending(truncated[:last_space])
-
-    return truncated
+    return generate_display_outline(content, max_items=max_items, max_len=90)
 
 
 def _generate_index(output_dir="output", topics_dir="topics"):

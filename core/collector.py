@@ -4,7 +4,7 @@ from datetime import datetime, timezone
 
 import yaml
 
-from sources import rss, api, scraper, youtube, social
+from sources import rss, api, scraper, social, web_search, youtube
 
 # Both youtube_channel and youtube_search map to the same youtube module;
 # youtube.fetch() dispatches internally based on source["type"].
@@ -12,6 +12,7 @@ ADAPTERS = {
     "rss": rss,
     "api": api,
     "scraper": scraper,
+    "web_search": web_search,
     "youtube_channel": youtube,
     "youtube_search": youtube,
     "social": social,

@@ -3,11 +3,11 @@
 
 import argparse
 import os
-import sys
 from datetime import datetime, timezone, timedelta
 
 import yaml
 
+from core.ai import resolve_ai_settings
 from core.collector import load_topic, collect, get_last_run, save_last_run
 from core.synthesizer import synthesize
 from core.renderer import render
@@ -28,7 +28,7 @@ def list_topics(topics_dir="topics"):
     return topics
 
 
-def run_topic(slug, global_config, dry_run=False):
+def run_topic(slug, global_config, dry_run=False, ai_provider=None, ai_model=None):
     """Run the full pipeline for a single topic."""
     print(f"\n{'='*50}")
     print(f"OVERWATCH — {slug.upper()}")
@@ -37,7 +37,8 @@ def run_topic(slug, global_config, dry_run=False):
     topic_config = load_topic(slug)
     state_dir = global_config.get("state_dir", "state")
     output_dir = global_config.get("output_dir", "output")
-    model = global_config.get("model")
+    ai_settings = resolve_ai_settings(global_config, provider_override=ai_provider, model_override=ai_model)
+    print(f"AI provider: {ai_settings['provider']}" + (f" (model: {ai_settings['model']})" if ai_settings.get("model") else ""))
 
     # Collect
     print("\n[1/4] Collecting sources...")
@@ -55,11 +56,11 @@ def run_topic(slug, global_config, dry_run=False):
         print(f"  Capped to most recent {max_items} items")
 
     if not items:
-        print("  No items from structured sources — Claude will research independently")
+        print("  No items from structured sources — the configured AI will research independently")
 
     # Synthesize
     print("\n[2/4] Synthesizing brief...")
-    content = synthesize(items, topic_config, model=model)
+    content = synthesize(items, topic_config, ai_settings=ai_settings)
     print(f"  Brief generated ({len(content)} chars)")
 
     # Render
@@ -88,6 +89,8 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Collect and synthesize but don't publish")
     parser.add_argument("--list", action="store_true", help="List available topics")
     parser.add_argument("--config", default="config.yaml", help="Path to global config")
+    parser.add_argument("--ai-provider", help="AI provider override (for example: claude or codex)")
+    parser.add_argument("--model", help="Model override for the selected AI provider")
     args = parser.parse_args()
 
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -101,9 +104,9 @@ def main():
 
     if args.topic == "all":
         for slug in list_topics():
-            run_topic(slug, global_config, dry_run=args.dry_run)
+            run_topic(slug, global_config, dry_run=args.dry_run, ai_provider=args.ai_provider, ai_model=args.model)
     else:
-        run_topic(args.topic, global_config, dry_run=args.dry_run)
+        run_topic(args.topic, global_config, dry_run=args.dry_run, ai_provider=args.ai_provider, ai_model=args.model)
 
 
 if __name__ == "__main__":

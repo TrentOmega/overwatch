@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ topic_name }} Brief — {{ date }}</title>
+    <title>{% if outline %}{{ outline }} | {% endif %}{{ topic_name }} Brief — {{ date }}</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -92,7 +92,7 @@
 <body>
     <header>
         <h1>{{ topic_name }} Brief</h1>
-        <div class="meta">{{ date }} · {{ item_count }} items collected · Overwatch</div>
+        <div class="meta">{{ date }} · {{ item_count }} items collected{% if outline %} · {{ outline }}{% endif %} · Overwatch</div>
     </header>
     <div class="content">
         {{ content_html }}

@@ -1,7 +1,9 @@
 """Web search source adapter — LLM self-research via search APIs."""
 
 import os
+import re
 from datetime import datetime, timezone
+from urllib.parse import urlparse
 
 import requests
 
@@ -15,11 +17,16 @@ def fetch(source_config, since=None):
         results = _search(query)
         for r in results:
             items.append({
-                "title": r.get("title", ""),
+                "title": _sanitize_untrusted_text(r.get("title", ""), max_len=200),
                 "url": r.get("url", ""),
-                "summary": r.get("snippet", ""),
+                "summary": _sanitize_untrusted_text(r.get("snippet", ""), max_len=500),
                 "date": r.get("date", datetime.now(timezone.utc).isoformat()),
                 "source_name": f"Web: {query}",
+                "source_type": "web_search",
+                "search_query": query,
+                "domain": _extract_domain(r.get("url", "")),
+                "trust_level": "untrusted_broad_search",
+                "verification_status": "unverified",
             })
 
     return items
@@ -103,3 +110,33 @@ def _search_serper(query, api_key):
     except Exception as e:
         print(f"    Serper search error: {e}")
         return []
+
+
+def _extract_domain(url):
+    """Return a normalized hostname for trust scoring and display."""
+    hostname = urlparse(url).hostname or ""
+    return hostname.lower().removeprefix("www.")
+
+
+def _sanitize_untrusted_text(text, max_len):
+    """Reduce prompt-injection payload surface in search snippets."""
+    if not text:
+        return ""
+
+    cleaned = re.sub(r"[\x00-\x1f\x7f]", " ", str(text))
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+
+    suspicious_patterns = [
+        r"ignore (all|any|the|previous|prior) instructions?",
+        r"follow these instructions",
+        r"system prompt",
+        r"developer message",
+        r"reveal (the )?(prompt|instructions?)",
+        r"tool(?:s)? call",
+        r"browse the web",
+        r"send (a )?message",
+    ]
+    for pattern in suspicious_patterns:
+        cleaned = re.sub(pattern, "[filtered-instruction-like text]", cleaned, flags=re.IGNORECASE)
+
+    return cleaned[:max_len]
