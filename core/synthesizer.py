@@ -122,7 +122,9 @@ def _synthesis_phase(items, research_items, topic_config, ai_settings, report_da
     user_prompt = _build_prompt(normalized_items, normalized_research_items, topic_config, synthesis_config, report_date=report_date)
     full_prompt = f"{system_prompt}\n\n{user_prompt}"
 
-    return run_prompt(full_prompt, ai_settings)
+    brief = run_prompt(full_prompt, ai_settings)
+    _validate_no_duplicate_story_urls(brief)
+    return brief
 
 
 def _build_prompt(items, research_items, topic_config, synthesis_config, report_date=None):
@@ -245,6 +247,7 @@ CRITICAL INSTRUCTIONS:
 - The table must use this exact format for each row: | 1 | [Category Name](#anchor) | signal text |
 - The number column is plain text (NOT a link). The category name column is the clickable anchor link. Example row: | 1 | [New LLMs / Lab Tools](#1-new-llm-versions--major-ai-lab-tools) | Signal text here |
 - Do NOT repeat the same underlying story in multiple categories. Choose the single best-fit category and mark the others NSTR if they have no distinct item
+- If a story could fit both "New LLM Versions / Major AI Lab Tools" and "Regulation & Policy", policy/election/governance content goes ONLY in "Regulation & Policy"
 - Do NOT populate "Notable Voices" from podcast material. That section is only for actual tracked-person/social-source updates
 - Do NOT place the same podcast/source URL in both "AI Workflows & Tactics" and "Podcast Highlights". If a podcast yields one actionable workflow item, put it in the best-fit section and make the other section `NSTR` unless there is a distinct second item
 - Then include ALL 9 categories in order, each with its own NUMBERED ## heading (e.g. "## 1. New LLM Versions / Major AI Lab Tools")
@@ -300,6 +303,43 @@ def _report_date_str(report_date):
     if report_date:
         return report_date.strftime("%Y-%m-%d")
     return datetime.now(_AEST).strftime("%Y-%m-%d")
+
+
+def _validate_no_duplicate_story_urls(brief):
+    """Reject briefs that place the same direct story URL in multiple categories."""
+    seen = {}
+    current_section = None
+
+    for line in brief.splitlines():
+        heading_match = re.match(r"^##\s+\d+\.\s+(.+?)\s*$", line)
+        if heading_match:
+            current_section = heading_match.group(1).strip().lower()
+            continue
+
+        if not current_section:
+            continue
+
+        for url in re.findall(r"https?://[^\s)>\]]+", line):
+            normalized_url = _normalize_story_url(url)
+            if not normalized_url:
+                continue
+            previous_section = seen.get(normalized_url)
+            if previous_section and previous_section != current_section:
+                raise ValueError(
+                    f"Duplicate story URL across categories: {normalized_url} "
+                    f"appears in '{previous_section}' and '{current_section}'"
+                )
+            seen[normalized_url] = current_section
+
+
+def _normalize_story_url(url):
+    """Normalize URL text enough for duplicate detection."""
+    parsed = urlparse(url.strip().rstrip(".,;:"))
+    if not parsed.scheme or not parsed.netloc:
+        return ""
+    hostname = parsed.netloc.lower().removeprefix("www.")
+    path = parsed.path.rstrip("/")
+    return f"{parsed.scheme.lower()}://{hostname}{path}"
 
 
 def _format_trusted_watchlist(entries, default_message="- No explicit watchlist configured."):
@@ -552,6 +592,22 @@ def _story_tokens(text):
 def _suggest_category_hint(item):
     """Return a lightweight category hint for the synthesis model."""
     haystack = f"{item.get('title', '')} {item.get('summary', '')}".lower()
+
+    policy_keywords = (
+        "election",
+        "elections",
+        "voter",
+        "political",
+        "safeguard",
+        "safeguards",
+        "policy",
+        "regulation",
+        "regulator",
+        "government",
+        "law",
+    )
+    if any(keyword in haystack for keyword in policy_keywords):
+        return "Regulation & Policy"
 
     open_weight_keywords = (
         "open weight",

@@ -12,6 +12,7 @@ from core.synthesizer import (
     _parse_research_output,
     _sanitize_for_prompt,
     _suggest_category_hint,
+    _validate_no_duplicate_story_urls,
 )
 
 
@@ -181,6 +182,33 @@ class SynthesizerTests(unittest.TestCase):
             _suggest_category_hint({"title": "OpenAI launches Codex desktop harness update"}),
             "New LLM versions / major AI lab tools",
         )
+
+    def test_suggest_category_hint_prefers_policy_for_election_updates(self):
+        self.assertEqual(
+            _suggest_category_hint({"title": "Anthropic election safeguards update", "summary": "Claude voter information banners"}),
+            "Regulation & Policy",
+        )
+
+    def test_validate_no_duplicate_story_urls_rejects_cross_category_duplicates(self):
+        brief = """# AI Daily Brief — 2026-04-25
+
+## 1. New LLM Versions / Major AI Lab Tools
+- Link: https://www.anthropic.com/news/election-safeguards-update
+
+## 5. Regulation & Policy
+- Link: https://anthropic.com/news/election-safeguards-update/
+"""
+        with self.assertRaisesRegex(ValueError, "Duplicate story URL"):
+            _validate_no_duplicate_story_urls(brief)
+
+    def test_validate_no_duplicate_story_urls_allows_same_category_references(self):
+        brief = """# AI Daily Brief — 2026-04-25
+
+## 5. Regulation & Policy
+- Link: https://www.anthropic.com/news/election-safeguards-update
+- Source: https://anthropic.com/news/election-safeguards-update/
+"""
+        _validate_no_duplicate_story_urls(brief)
 
 
 if __name__ == "__main__":

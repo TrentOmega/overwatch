@@ -187,6 +187,8 @@ synthesis:
     - For government and media links, make sure the URL resolves to the specific article and not a caretaker homepage, section landing page, or generic redirect target.
     - NEVER place an open-weight/open-source model release in category 1. Those belong in `FOSS / open-weight LMs & tools`.
     - CLOSED/proprietary frontier model releases and major lab tools belong in `New LLM versions / major AI lab tools`.
+    - NEVER repeat the same story in more than one category. Choose the single best-fit category.
+    - If a story could fit both lab tools and policy/regulation, policy, governance, election, and safety-posture items belong only in `Regulation & policy`.
 
     Do NOT include any classification statement (e.g. "Classification: OPEN SOURCE" or "Period:" lines).
 
