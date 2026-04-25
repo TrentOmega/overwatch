@@ -2,6 +2,8 @@
 
 import os
 import re
+import subprocess
+import time
 from datetime import datetime, timezone
 from urllib.parse import urlparse
 
@@ -11,10 +13,13 @@ import requests
 def fetch(source_config, since=None):
     """Search the web for recent news on configured queries."""
     queries = source_config.get("queries", [])
+    categories = source_config.get("categories")
+    time_range = source_config.get("time_range", "day")
+    max_results = source_config.get("max_results", 5)
     items = []
 
     for query in queries:
-        results = _search(query)
+        results = _search(query, categories=categories, time_range=time_range, max_results=max_results)
         for r in results:
             items.append({
                 "title": _sanitize_untrusted_text(r.get("title", ""), max_len=200),
@@ -32,12 +37,14 @@ def fetch(source_config, since=None):
     return items
 
 
-def _search(query):
+def _search(query, categories=None, time_range="day", max_results=5):
     """Execute a web search. Tries available search backends in order."""
     # Try SearXNG (self-hosted, free)
     searxng_url = os.getenv("SEARXNG_URL")
     if searxng_url:
-        return _search_searxng(query, searxng_url)
+        results = _search_searxng(query, searxng_url, categories=categories, time_range=time_range, max_results=max_results)
+        if results is not None:
+            return results
 
     # Try Brave Search API (free tier: 2000 queries/mo)
     brave_key = os.getenv("BRAVE_SEARCH_API_KEY")
@@ -53,23 +60,33 @@ def _search(query):
     return []
 
 
-def _search_searxng(query, base_url):
+def _search_searxng(query, base_url, categories=None, time_range="day", max_results=5):
     """Search using a SearXNG instance."""
-    try:
-        resp = requests.get(
-            f"{base_url}/search",
-            params={"q": query, "format": "json", "time_range": "day", "categories": "news"},
-            timeout=15,
-        )
-        resp.raise_for_status()
-        data = resp.json()
-        return [
-            {"title": r.get("title", ""), "url": r.get("url", ""), "snippet": r.get("content", ""), "date": r.get("publishedDate", "")}
-            for r in data.get("results", [])[:5]
-        ]
-    except Exception as e:
-        print(f"    SearXNG search error: {e}")
-        return []
+    for attempt in range(2):
+        try:
+            params = {"q": query, "format": "json"}
+            if time_range:
+                params["time_range"] = time_range
+            if categories:
+                params["categories"] = categories
+            resp = requests.get(
+                f"{base_url}/search",
+                params=params,
+                timeout=15,
+            )
+            resp.raise_for_status()
+            data = resp.json()
+            return [
+                {"title": r.get("title", ""), "url": r.get("url", ""), "snippet": r.get("content", ""), "date": r.get("publishedDate", "")}
+                for r in data.get("results", [])[:max_results]
+            ]
+        except Exception as e:
+            if attempt == 0 and _is_local_searxng(base_url) and _try_start_local_searxng():
+                time.sleep(2)
+                continue
+            print(f"    SearXNG search error: {e}")
+            return None
+    return None
 
 
 def _search_brave(query, api_key):
@@ -140,3 +157,22 @@ def _sanitize_untrusted_text(text, max_len):
         cleaned = re.sub(pattern, "[filtered-instruction-like text]", cleaned, flags=re.IGNORECASE)
 
     return cleaned[:max_len]
+
+
+def _is_local_searxng(base_url):
+    """Return True when the configured SearXNG endpoint is local to this machine."""
+    hostname = urlparse(base_url).hostname or ""
+    return hostname in {"127.0.0.1", "localhost"}
+
+
+def _try_start_local_searxng():
+    """Best-effort recovery for the local SearXNG daemon used by cron runs."""
+    launcher = os.path.expanduser("~/.local/bin/searxng-local-start")
+    if not os.path.isfile(launcher):
+        return False
+
+    try:
+        subprocess.run([launcher], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
+        return True
+    except Exception:
+        return False

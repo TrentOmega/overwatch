@@ -47,7 +47,7 @@ def save_last_run(topic_slug, state_dir="state"):
         json.dump({"last_run": datetime.now(timezone.utc).isoformat()}, f)
 
 
-def collect(topic_config, since=None):
+def collect(topic_config, since=None, until=None):
     """Collect items from all sources defined in a topic config."""
     all_items = []
 
@@ -60,6 +60,7 @@ def collect(topic_config, since=None):
 
         try:
             items = adapter.fetch(source, since=since)
+            items = _filter_items_by_date(items, since=since, until=until)
             print(f"  [{source_type}] {source.get('name', '?')}: {len(items)} items")
             all_items.extend(items)
         except NotImplementedError as e:
@@ -68,3 +69,44 @@ def collect(topic_config, since=None):
             print(f"  [{source_type}] {source.get('name', '?')}: error - {e}")
 
     return all_items
+
+
+def _filter_items_by_date(items, since=None, until=None):
+    """Apply a collection window after adapter fetches."""
+    if not since and not until:
+        return items
+
+    filtered = []
+    for item in items:
+        parsed = _parse_item_date(item.get("date"))
+        if parsed is None:
+            if until and item.get("source_type") == "web_search":
+                continue
+            filtered.append(item)
+            continue
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        if since and parsed < since:
+            continue
+        if until and parsed >= until:
+            continue
+        filtered.append(item)
+    return filtered
+
+
+def _parse_item_date(value):
+    """Parse ISO timestamps and YYYYMMDD YouTube dates into aware datetimes."""
+    if not value:
+        return None
+
+    if isinstance(value, datetime):
+        return value if value.tzinfo else value.replace(tzinfo=timezone.utc)
+
+    text = str(value).strip()
+    if len(text) == 8 and text.isdigit():
+        return datetime.strptime(text, "%Y%m%d").replace(tzinfo=timezone.utc)
+
+    try:
+        return datetime.fromisoformat(text.replace("Z", "+00:00"))
+    except ValueError:
+        return None

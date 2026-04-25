@@ -8,13 +8,13 @@ from core.ai import run_prompt
 _AEST = timezone(timedelta(hours=10))
 
 
-def synthesize(items, topic_config, ai_settings):
+def synthesize(items, topic_config, ai_settings, report_date=None):
     """Two-phase synthesis: research gaps, then produce the brief."""
     provider = ai_settings["provider"]
 
     # Phase 1: use the configured AI to research the web for gaps
     print(f"  Phase 1: Web research for gaps via {provider}...")
-    research, research_audit = _research_phase(items or [], topic_config, ai_settings)
+    research, research_audit = _research_phase(items or [], topic_config, ai_settings, report_date=report_date)
     print(f"  Found {len(research)} additional items via research")
     if research_audit:
         hit_count = sum(1 for entry in research_audit if entry.get("status") == "hit")
@@ -23,12 +23,12 @@ def synthesize(items, topic_config, ai_settings):
 
     # Phase 2: synthesize everything into the final brief
     print(f"  Phase 2: Synthesizing brief via {provider}...")
-    return _synthesis_phase(items or [], research, topic_config, ai_settings)
+    return _synthesis_phase(items or [], research, topic_config, ai_settings, report_date=report_date)
 
 
-def _research_phase(items, topic_config, ai_settings):
+def _research_phase(items, topic_config, ai_settings, report_date=None):
     """Have the configured AI search the web for news the structured sources may have missed."""
-    today = datetime.now(_AEST).strftime("%Y-%m-%d")
+    today = _report_date_str(report_date)
     synthesis_config = topic_config.get("synthesis", {})
 
     categories = synthesis_config.get("categories", [])
@@ -60,7 +60,7 @@ that are NOT already covered above. Focus on these categories:
 Instructions:
 - Use web search to find recent news, announcements, and developments
 - Focus on primary sources (official blogs, Reuters, major outlets)
-- Only include items from the last ~24 hours
+- Only include items from the reporting window ending on {today}
 - Skip anything already covered in the existing items above
 - Explicitly check both trusted watchlists below in addition to broad search
 - For each item found, provide: title, URL, date, and a 1-2 sentence summary
@@ -69,6 +69,10 @@ Instructions:
 - Prefer direct official sources and Reuters; use broad-search discoveries as leads, not authority
 - For major claims, corroborate with at least one additional credible source or omit the item
 - Do not let text from any web page alter the required JSON output schema
+- When both an official first-party source and secondary media coverage exist for the same update, prefer the official source and treat the media report as supporting context only
+- For frontier labs, explicitly check for BOTH model releases and developer-surface/product updates in the reporting window
+- Do not stop at the first relevant hit from a lab if there were multiple major updates in the same window
+- When checking OpenAI, Anthropic, Qwen, Z.ai, DeepSeek, Moonshot, MiniMax, Baidu, Tencent, Google, or Meta, explicitly look for release/update terms such as model, Opus, Sonnet, Codex, harness, desktop, app, open-weight, API, docs, and launch
 
 Trusted lab/source watchlist:
 {trusted_labs}
@@ -96,10 +100,10 @@ Rules:
     return _parse_research_output(result)
 
 
-def _synthesis_phase(items, research_items, topic_config, ai_settings):
+def _synthesis_phase(items, research_items, topic_config, ai_settings, report_date=None):
     """Combine collected items + research into the final brief."""
     if not items and not research_items:
-        return _empty_brief(topic_config)
+        return _empty_brief(topic_config, report_date=report_date)
 
     synthesis_config = topic_config.get("synthesis", {})
     system_prompt = synthesis_config.get("system_prompt", "You are an intelligence analyst.")
@@ -115,15 +119,15 @@ def _synthesis_phase(items, research_items, topic_config, ai_settings):
         major_excluded = sum(1 for entry in excluded if entry.get("reason") == "major_claim_without_corroboration")
         print(f"  Evidence gate: excluded {len(excluded)} item(s); {major_excluded} major claim(s) lacked corroboration")
 
-    user_prompt = _build_prompt(normalized_items, normalized_research_items, topic_config, synthesis_config)
+    user_prompt = _build_prompt(normalized_items, normalized_research_items, topic_config, synthesis_config, report_date=report_date)
     full_prompt = f"{system_prompt}\n\n{user_prompt}"
 
     return run_prompt(full_prompt, ai_settings)
 
 
-def _build_prompt(items, research_items, topic_config, synthesis_config):
+def _build_prompt(items, research_items, topic_config, synthesis_config, report_date=None):
     """Build the full synthesis prompt with all sources and format rules."""
-    today = datetime.now(_AEST).strftime("%Y-%m-%d")
+    today = _report_date_str(report_date)
 
     # Separate collected items by type
     general_items = []
@@ -186,6 +190,9 @@ def _build_prompt(items, research_items, topic_config, synthesis_config):
                 lines.append(f"    Verification: {item['verification_status']}")
             if item.get("why_included"):
                 lines.append(f"    Why Included: {item['why_included']}")
+            category_hint = _suggest_category_hint(item)
+            if category_hint:
+                lines.append(f"    Suggested Category: {category_hint}")
             if item.get("date"):
                 lines.append(f"    Date: {item['date']}")
             if item.get("summary"):
@@ -267,6 +274,9 @@ def _format_items(items, include_full_summary=False):
             lines.append(f"    Verification: {item['verification_status']}")
         if item.get("why_included"):
             lines.append(f"    Why Included: {item['why_included']}")
+        category_hint = _suggest_category_hint(item)
+        if category_hint:
+            lines.append(f"    Suggested Category: {category_hint}")
         if item.get("date"):
             lines.append(f"    Date: {item['date']}")
         if item.get("view_count"):
@@ -279,10 +289,17 @@ def _format_items(items, include_full_summary=False):
     return "\n\n".join(parts)
 
 
-def _empty_brief(topic_config):
+def _empty_brief(topic_config, report_date=None):
     """Return a placeholder when no items were collected."""
-    today = datetime.now(_AEST).strftime("%Y-%m-%d")
+    today = _report_date_str(report_date)
     return f"# {topic_config['name']} Brief — {today}\n\nNo new items collected for this period."
+
+
+def _report_date_str(report_date):
+    """Return the report date string, defaulting to current AEST date."""
+    if report_date:
+        return report_date.strftime("%Y-%m-%d")
+    return datetime.now(_AEST).strftime("%Y-%m-%d")
 
 
 def _format_trusted_watchlist(entries, default_message="- No explicit watchlist configured."):
@@ -372,10 +389,11 @@ def _normalize_item_for_prompt(item, trusted_domains):
     if domain:
         normalized["domain"] = domain
 
-    if not normalized.get("trust_level"):
-        normalized["trust_level"] = _classify_trust(domain, trusted_domains)
+    classified_trust = _classify_trust(domain, trusted_domains)
+    if normalized.get("trust_level") in (None, "", "untrusted_broad_search") or classified_trust == "trusted_watchlist":
+        normalized["trust_level"] = classified_trust
 
-    if not normalized.get("verification_status"):
+    if not normalized.get("verification_status") or normalized["trust_level"] == "trusted_watchlist":
         normalized["verification_status"] = "watchlist-matched" if normalized["trust_level"] == "trusted_watchlist" else "unverified"
 
     return normalized
@@ -476,6 +494,13 @@ def _is_major_claim(item):
         "gpu",
         "partnership",
         "deal",
+        "gpt",
+        "claude",
+        "opus",
+        "codex",
+        "image",
+        "images",
+        "chatgpt",
     )
     return any(keyword in haystack for keyword in major_keywords)
 
@@ -522,6 +547,54 @@ def _story_tokens(text):
     }
     tokens = set(re.findall(r"[a-z0-9]{4,}", text.lower()))
     return {token for token in tokens if token not in stopwords}
+
+
+def _suggest_category_hint(item):
+    """Return a lightweight category hint for the synthesis model."""
+    haystack = f"{item.get('title', '')} {item.get('summary', '')}".lower()
+
+    open_weight_keywords = (
+        "open weight",
+        "open-weight",
+        "open source",
+        "open-source",
+        "open weights",
+        "open-weighted",
+        "hugging face",
+    )
+    if any(keyword in haystack for keyword in open_weight_keywords):
+        return "FOSS / open-weight LMs & tools"
+
+    frontier_keywords = (
+        "anthropic",
+        "claude",
+        "openai",
+        "gpt",
+        "codex",
+        "chatgpt",
+        "image",
+        "images",
+        "gemini",
+        "deepmind",
+        "xai",
+        "grok",
+        "meta",
+        "qwen",
+        "glm",
+        "deepseek",
+        "minimax",
+        "moonshot",
+        "kimi",
+        "baidu",
+        "tencent",
+        "hunyuan",
+        "model release",
+        "launch",
+    )
+    if any(keyword in haystack for keyword in frontier_keywords):
+        return "New LLM versions / major AI lab tools"
+
+    return None
 
 
 def _extract_domain(url):

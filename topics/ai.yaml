@@ -18,9 +18,30 @@ sources:
 
   - type: web_search
     name: Axiom Math
+    categories: news
     queries:
       - "Axiom Math"
       - "Carina Hong Axiom Math"
+
+  - type: web_search
+    name: Frontier Labs / Model Releases
+    categories: general
+    time_range: week
+    max_results: 8
+    queries:
+      - "site:openai.com/index GPT-5.5"
+      - "site:openai.com GPT-5.5 system card API Codex"
+      - "site:developers.openai.com gpt-image-2"
+      - "site:openai.com ChatGPT Images 2.0"
+      - "OpenAI GPT Image 2 ChatGPT Images 2.0"
+      - "site:anthropic.com Claude Opus 4.7"
+      - "Anthropic model release Claude Opus"
+      - "OpenAI Codex harness desktop update"
+      - "OpenAI model release GPT"
+      - "OpenAI image model release"
+      - "Qwen open-weight model release"
+      - "GLM open-weight model release"
+      - "DeepSeek model release"
 
   # --- AI Daily Brief podcast ---
   - type: youtube_channel
@@ -126,10 +147,10 @@ synthesis:
 
   categories:
     - name: "New LLM versions / major AI lab tools"
-      scope: "New LLM version releases or new tools from Google, Anthropic, xAI, Meta, OpenAI, Z.ai/Zhipu, DeepSeek, Moonshot/Kimi, MiniMax, Qwen/Alibaba, Baidu, Tencent, and other major competitors"
+      scope: "New CLOSED frontier-model releases or major proprietary lab tools from Google, Anthropic, xAI, Meta, OpenAI, Z.ai/Zhipu, DeepSeek, Moonshot/Kimi, MiniMax, Qwen/Alibaba, Baidu, Tencent, and other major competitors. Do NOT place open-weight releases here."
 
     - name: "FOSS / open-weight LMs & tools"
-      scope: "Major FOSS/open-weight LM updates (e.g. GLM, DeepSeek, OpenClaw, Llama)"
+      scope: "Major FOSS/open-weight LM updates (e.g. GLM, DeepSeek, OpenClaw, Llama, Qwen). If a release is open-weight, it belongs here even if it comes from a frontier lab."
 
     - name: "Major financial AI company news"
       scope: "Significant financial moves, funding, acquisitions, IPOs in AI"
@@ -164,6 +185,8 @@ synthesis:
     - Keep each item concise
     - NEVER link to a site's homepage or generic page when a direct article URL is available. Every link must point to the specific content being referenced.
     - For government and media links, make sure the URL resolves to the specific article and not a caretaker homepage, section landing page, or generic redirect target.
+    - NEVER place an open-weight/open-source model release in category 1. Those belong in `FOSS / open-weight LMs & tools`.
+    - CLOSED/proprietary frontier model releases and major lab tools belong in `New LLM versions / major AI lab tools`.
 
     Do NOT include any classification statement (e.g. "Classification: OPEN SOURCE" or "Period:" lines).
 
@@ -183,12 +206,39 @@ synthesis:
     - Australian AI ecosystem
 
   trusted_lab_watchlist:
+    - name: "Anthropic"
+      focus: "Claude model releases, Opus/Sonnet updates, Claude desktop/Cowork changes, and official product or safety announcements"
+      urls:
+        - https://www.anthropic.com/news
+        - https://www.anthropic.com/claude/opus
+        - https://x.com/AnthropicAI
+
+    - name: "OpenAI"
+      focus: "GPT model releases, GPT-5.x updates, gpt-image/image-generation releases, Codex model/app/harness releases, ChatGPT desktop changes, and official product or research announcements"
+      urls:
+        - https://openai.com/index/
+        - https://openai.com/news
+        - https://developers.openai.com/
+        - https://openai.com/codex/
+        - https://x.com/OpenAI
+
     - name: "Z.ai / Zhipu"
       focus: "GLM releases, model cards, technical reports, API/docs updates, and open-source drops"
       urls:
         - https://docs.z.ai/
         - https://huggingface.co/zai-org
         - https://x.com/Zai_org
+
+    - name: "Google DeepMind"
+      focus: "Gemini model releases, DeepMind research launches, and developer-platform updates"
+      urls:
+        - https://blog.google/technology/google-deepmind/
+        - https://deepmind.google/discover/blog/
+
+    - name: "Meta AI"
+      focus: "Llama, open-weight model drops, and developer-platform releases"
+      urls:
+        - https://ai.meta.com/blog/
 
     - name: "DeepSeek"
       focus: "model releases, API updates, and official benchmark/report posts"

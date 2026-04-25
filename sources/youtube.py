@@ -3,6 +3,7 @@
 import os
 import re
 import json
+import sys
 from datetime import datetime, timezone, timedelta
 
 import requests
@@ -82,7 +83,7 @@ def fetch_search(source_config, since=None):
     try:
         import subprocess
         cmd = [
-            "yt-dlp",
+            *_yt_dlp_base_cmd(),
             f"ytsearch{max_results * 2}:{query}",  # fetch extra to filter
             "--dump-json",
             "--flat-playlist",
@@ -180,7 +181,7 @@ def get_transcript(video_id):
         with tempfile.TemporaryDirectory() as tmpdir:
             url = f"https://www.youtube.com/watch?v={video_id}"
             cmd = [
-                "yt-dlp",
+                *_yt_dlp_base_cmd(),
                 "--skip-download",
                 "--write-auto-sub",
                 "--write-sub",
@@ -273,3 +274,8 @@ def _extract_video_id(url):
     """Extract video ID from a YouTube URL."""
     match = re.search(r"(?:v=|youtu\.be/)([\w-]{11})", url)
     return match.group(1) if match else None
+
+
+def _yt_dlp_base_cmd():
+    """Run yt-dlp from the active Python environment instead of relying on PATH."""
+    return [sys.executable, "-m", "yt_dlp"]

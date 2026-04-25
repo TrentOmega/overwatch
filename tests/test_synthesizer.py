@@ -11,6 +11,7 @@ from core.synthesizer import (
     _normalize_item_for_prompt,
     _parse_research_output,
     _sanitize_for_prompt,
+    _suggest_category_hint,
 )
 
 
@@ -62,6 +63,19 @@ class SynthesizerTests(unittest.TestCase):
         self.assertIn("[filtered-instruction-like text]", normalized["title"])
         self.assertIn("[filtered-instruction-like text]", normalized["summary"])
         self.assertEqual(normalized["domain"], "reuters.com")
+        self.assertEqual(normalized["trust_level"], "trusted_watchlist")
+        self.assertEqual(normalized["verification_status"], "watchlist-matched")
+
+    def test_normalize_item_for_prompt_upgrades_search_hit_from_trusted_domain(self):
+        item = {
+            "title": "Introducing GPT-5.5",
+            "url": "https://openai.com/index/introducing-gpt-5-5",
+            "summary": "OpenAI released GPT-5.5.",
+            "trust_level": "untrusted_broad_search",
+            "verification_status": "unverified",
+        }
+        normalized = _normalize_item_for_prompt(item, {"openai.com"})
+        self.assertEqual(normalized["domain"], "openai.com")
         self.assertEqual(normalized["trust_level"], "trusted_watchlist")
         self.assertEqual(normalized["verification_status"], "watchlist-matched")
 
@@ -157,6 +171,16 @@ class SynthesizerTests(unittest.TestCase):
         self.assertEqual(len(research_items), 2)
         self.assertEqual(excluded, [])
         self.assertTrue(research_items[0]["verification_status"].startswith("corroborated:"))
+
+    def test_suggest_category_hint_prefers_open_weight_bucket(self):
+        self.assertEqual(
+            _suggest_category_hint({"title": "Qwen open-weight release", "summary": "new open-weight coding model"}),
+            "FOSS / open-weight LMs & tools",
+        )
+        self.assertEqual(
+            _suggest_category_hint({"title": "OpenAI launches Codex desktop harness update"}),
+            "New LLM versions / major AI lab tools",
+        )
 
 
 if __name__ == "__main__":
